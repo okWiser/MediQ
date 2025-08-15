@@ -10,3 +10,21 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Verification Code</mat-label>
           <input matInput formControlName="code" placeholder="Enter 6-digit code" maxlength="6">
+          <mat-error *ngIf="twoFactorForm.get('code')?.hasError('required')">
+            Verification code is required
+          </mat-error>
+          <mat-error *ngIf="twoFactorForm.get('code')?.hasError('pattern')">
+            Please enter a valid 6-digit code
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" 
+                [disabled]="loading$ | async" class="full-width">
+          Verify Code
+        </button>
+
+        <button mat-button type="button" (click)="onResendCode()" class="full-width">
+          Resend Code
+        </button>
+      </form>
+    </mat-card-content>
