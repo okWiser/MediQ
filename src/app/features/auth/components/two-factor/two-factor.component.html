@@ -1,0 +1,12 @@
+<div class="two-factor-container">
+  <mat-card class="two-factor-card">
+    <mat-card-header>
+      <mat-card-title>Two-Factor Authentication</mat-card-title>
+      <mat-card-subtitle>Enter the 6-digit code from your authenticator app</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="twoFactorForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Verification Code</mat-label>
+          <input matInput formControlName="code" placeholder="Enter 6-digit code" maxlength="6">
