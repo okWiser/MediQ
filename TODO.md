@@ -9,28 +9,28 @@
 - [x] Set up responsive design system (mobile-first) ✅ (SCSS variables, mixins, mobile-first breakpoints)
 
 ## Phase 2: Authentication & Security (Core)
-- [x] Implement JWT/OAuth authentication
-- [x] Add role-based access control (Patient, Doctor, Admin)
-- [x] Implement 2FA (Two-Factor Authentication)
-- [x] Add biometric authentication readiness
-- [x] Set up secure token storage
-- [x] Configure HTTPS enforcement
+- [ ] Implement JWT/OAuth authentication
+- [ ] Add role-based access control (Patient, Doctor, Admin)
+- [ ] Implement 2FA (Two-Factor Authentication)
+- [ ] Add biometric authentication readiness
+- [ ] Set up secure token storage
+- [ ] Configure HTTPS enforcement
 
 ## Phase 3: Core Features (MVP)
-- [x] Patient Dashboard
-  - [x] Appointments management
-  - [x] Prescriptions view
-  - [x] Health records access
-- [x] Doctor Portal
-  - [x] Schedule management
-  - [x] Patient notes system
-  - [x] Video consultation setup
-- [x] Telemedicine integration
-  - [x] Real-time chat system
-  - [x] WebRTC video calls
-- [x] Notification system
-  - [x] RxJS-powered alerts
-  - [x] Push notifications setup
+- [ ] Patient Dashboard
+  - [ ] Appointments management
+  - [ ] Prescriptions view
+  - [ ] Health records access
+- [ ] Doctor Portal
+  - [ ] Schedule management
+  - [ ] Patient notes system
+  - [ ] Video consultation setup
+- [ ] Telemedicine integration
+  - [ ] Real-time chat system
+  - [ ] WebRTC video calls
+- [ ] Notification system
+  - [ ] RxJS-powered alerts
+  - [ ] Push notifications setup
 
 ## Phase 4: Premium Features (Phase 1)
 - [ ] AI Symptom Checker
