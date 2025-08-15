@@ -17,20 +17,20 @@
 - [x] Configure HTTPS enforcement
 
 ## Phase 3: Core Features (MVP)
-- [ ] Patient Dashboard
-  - [ ] Appointments management
-  - [ ] Prescriptions view
-  - [ ] Health records access
-- [ ] Doctor Portal
-  - [ ] Schedule management
-  - [ ] Patient notes system
-  - [ ] Video consultation setup
-- [ ] Telemedicine integration
-  - [ ] Real-time chat system
-  - [ ] WebRTC video calls
-- [ ] Notification system
-  - [ ] RxJS-powered alerts
-  - [ ] Push notifications setup
+- [x] Patient Dashboard
+  - [x] Appointments management
+  - [x] Prescriptions view
+  - [x] Health records access
+- [x] Doctor Portal
+  - [x] Schedule management
+  - [x] Patient notes system
+  - [x] Video consultation setup
+- [x] Telemedicine integration
+  - [x] Real-time chat system
+  - [x] WebRTC video calls
+- [x] Notification system
+  - [x] RxJS-powered alerts
+  - [x] Push notifications setup
 
 ## Phase 4: Premium Features (Phase 1)
 - [ ] AI Symptom Checker
