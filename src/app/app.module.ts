@@ -15,6 +15,7 @@ import { MaterialModule } from './shared/material.module';
 import { reducers, metaReducers } from './core/store';
 import { AuthEffects } from './core/store/auth/auth.effects';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { SecurityInterceptor } from './core/interceptors/security.interceptor';
 import { environment } from '../environments/environment';
 
 // AoT requires an exported function for factories
