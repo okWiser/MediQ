@@ -1,35 +1,13 @@
-<div class="container">
-  <header>
-    <h1>MediQ Healthcare Management System</h1>
-    <p>Phase 1: Project Setup & Core Architecture - COMPLETED ✅</p>
-  </header>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>MediQ Healthcare System</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/symptom-checker">AI Symptom Checker</button>
+    <button mat-button routerLink="/voice-notes">Voice Notes</button>
+    <button mat-button routerLink="/smart-scheduling">Smart Scheduling</button>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-  <main>
-    <div class="card">
-      <h2>System Status</h2>
-      <ul>
-        <li>✅ Angular 20.1.7 with TypeScript</li>
-        <li>✅ NgRx Store Architecture</li>
-        <li>✅ RxJS Reactive Programming</li>
-        <li>✅ HIPAA-Compliant Security Headers</li>
-        <li>✅ Environment Variables</li>
-        <li>✅ Mobile-First Responsive Design</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>Features Ready</h2>
-      <ul>
-        <li>✅ Security Interceptors</li>
-        <li>✅ Material Design System</li>
-        <li>✅ State Management</li>
-        <li>✅ Internationalization Setup</li>
-        <li>✅ Service Worker Ready</li>
-      </ul>
-    </div>
-  </main>
-
-  <footer>
-    <p>Ready to proceed to Phase 4: Premium Features</p>
-  </footer>
-</div>
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
