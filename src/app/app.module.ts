@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -18,6 +19,11 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { SecurityInterceptor } from './core/interceptors/security.interceptor';
 import { environment } from '../environments/environment';
 
+// Phase 4 Components
+import { SymptomCheckerComponent } from './features/ai/symptom-checker/symptom-checker.component';
+import { VoiceNotesComponent } from './features/voice-notes/voice-notes.component';
+import { SmartSchedulingComponent } from './features/smart-scheduling/smart-scheduling.component';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -25,12 +31,16 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SymptomCheckerComponent,
+    VoiceNotesComponent,
+    SmartSchedulingComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MaterialModule,
     StoreModule.forRoot(reducers, { metaReducers }),

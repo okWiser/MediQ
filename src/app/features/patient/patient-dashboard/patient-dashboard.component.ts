@@ -84,4 +84,13 @@ export class PatientDashboardComponent implements OnInit {
   viewHealthRecord(id: string): void {
     // View health record details
   }
+
+  // Phase 4 Integration Methods
+  openSymptomChecker(): void {
+    // Open AI symptom checker
+  }
+
+  useSmartScheduling(): void {
+    // Open smart scheduling for appointment booking
+  }
 }

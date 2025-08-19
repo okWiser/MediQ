@@ -1,0 +1,130 @@
+<div class="smart-scheduling">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Smart Scheduling</mat-card-title>
+      <mat-card-subtitle>AI-powered appointment suggestions and optimization</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="searchForm" (ngSubmit)="searchSuggestions()">
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Patient ID</mat-label>
+            <input matInput formControlName="patientId" required>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Symptoms (comma-separated)</mat-label>
+            <input matInput formControlName="symptoms" placeholder="fever, headache, cough">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Urgency Level</mat-label>
+            <mat-select formControlName="urgency">
+              <mat-option *ngFor="let level of urgencyLevels" [value]="level.value">
+                {{level.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Preferred Date</mat-label>
+            <input matInput type="date" formControlName="preferredDate">
+          </mat-form-field>
+        </div>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+            <mat-icon *ngIf="isLoading">hourglass_empty</mat-icon>
+            {{isLoading ? 'Searching...' : 'Find Smart Suggestions'}}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="suggestions-grid" *ngIf="suggestions.length > 0">
+    <mat-card *ngFor="let suggestion of suggestions" class="suggestion-card">
+      <mat-card-header>
+        <mat-card-title>{{suggestion.doctorName}}</mat-card-title>
+        <mat-card-subtitle>{{suggestion.specialization}}</mat-card-subtitle>
+        <div class="match-score">
+          <mat-chip [style.background-color]="getMatchScoreColor(suggestion.matchScore)">
+            {{suggestion.matchScore}}% Match
+          </mat-chip>
+        </div>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p class="reason">{{suggestion.reasonForSuggestion}}</p>
+        
+        <div class="available-slots">
+          <h4>Available Slots:</h4>
+          <div class="slots-grid">
+            <mat-card *ngFor="let slot of suggestion.availableSlots" class="slot-card">
+              <div class="slot-info">
+                <div class="slot-time">
+                  {{slot.date | date:'MMM d'}} at {{slot.time}}
+                </div>
+                <div class="slot-duration">{{slot.duration}} min</div>
+                <mat-chip [style.background-color]="getPriorityColor(slot.priority)" class="priority-chip">
+                  {{slot.priority}}
+                </mat-chip>
+              </div>
+              <button mat-stroked-button color="primary" 
+                      (click)="bookAppointment(suggestion, slot)">
+                Book
+              </button>
+            </mat-card>
+          </div>
+        </div>
+        
+        <mat-card-actions>
+          <button mat-button color="accent" (click)="optimizeSchedule(suggestion.doctorId)">
+            <mat-icon>auto_fix_high</mat-icon>
+            Optimize Schedule
+          </button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="optimization" class="optimization-results">
+    <mat-card-header>
+      <mat-card-title>Schedule Optimization Results</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="optimization-metrics">
+        <div class="metric">
+          <span class="label">Current Load:</span>
+          <span class="value">{{optimization.currentLoad}}%</span>
+        </div>
+        <div class="metric">
+          <span class="label">Efficiency Score:</span>
+          <span class="value">{{optimization.efficiencyScore}}/100</span>
+        </div>
+      </div>
+
+      <div class="suggested-breaks" *ngIf="optimization.suggestedBreaks.length > 0">
+        <h4>Suggested Breaks:</h4>
+        <mat-list>
+          <mat-list-item *ngFor="let breakSlot of optimization.suggestedBreaks">
+            {{breakSlot.date | date:'MMM d'}} at {{breakSlot.time}} ({{breakSlot.duration}} min)
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <div class="conflict-resolutions" *ngIf="optimization.conflictResolutions.length > 0">
+        <h4>Conflict Resolutions:</h4>
+        <mat-list>
+          <mat-list-item *ngFor="let resolution of optimization.conflictResolutions">
+            {{resolution}}
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

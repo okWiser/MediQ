@@ -1,0 +1,97 @@
+<div class="symptom-checker">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>AI Symptom Checker</mat-card-title>
+      <mat-card-subtitle>Get AI-powered health insights based on your symptoms</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="symptomForm" (ngSubmit)="analyzeSymptoms()">
+        <div class="form-section">
+          <h3>Select Your Symptoms</h3>
+          <div class="symptom-chips">
+            <mat-chip-listbox>
+              <mat-chip-option 
+                *ngFor="let symptom of commonSymptoms" 
+                (click)="addSymptom(symptom)"
+                [selected]="symptomsArray.value.includes(symptom)">
+                {{symptom}}
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </div>
+          
+          <div class="selected-symptoms" *ngIf="symptomsArray.length > 0">
+            <h4>Selected Symptoms:</h4>
+            <mat-chip-listbox>
+              <mat-chip-option 
+                *ngFor="let symptom of symptomsArray.controls; let i = index"
+                (removed)="removeSymptom(i)">
+                {{symptom.value}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <mat-form-field>
+            <mat-label>Age (optional)</mat-label>
+            <input matInput type="number" formControlName="age">
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Gender (optional)</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+              <mat-option value="other">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit" 
+                  [disabled]="symptomsArray.length === 0 || isAnalyzing">
+            <mat-icon *ngIf="isAnalyzing">hourglass_empty</mat-icon>
+            {{isAnalyzing ? 'Analyzing...' : 'Analyze Symptoms'}}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="analysis" class="analysis-results">
+    <mat-card-header>
+      <mat-card-title>Analysis Results</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="severity-indicator">
+        <mat-chip [style.background-color]="getSeverityColor(analysis.severity)">
+          {{analysis.severity | titlecase}} Priority
+        </mat-chip>
+      </div>
+
+      <div class="conditions">
+        <h4>Possible Conditions:</h4>
+        <mat-list>
+          <mat-list-item *ngFor="let condition of analysis.possibleConditions">
+            {{condition}}
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <div class="recommendations">
+        <h4>Recommendations:</h4>
+        <mat-list>
+          <mat-list-item *ngFor="let rec of analysis.recommendations">
+            {{rec}}
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <mat-divider></mat-divider>
+      <p class="disclaimer">{{analysis.disclaimer}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

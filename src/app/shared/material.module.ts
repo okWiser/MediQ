@@ -28,6 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -60,7 +61,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSlideToggleModule,
     MatTabsModule,
     MatStepperModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDividerModule
   ],
   exports: [
     MatToolbarModule,
@@ -90,7 +92,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSlideToggleModule,
     MatTabsModule,
     MatStepperModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule { }

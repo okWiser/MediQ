@@ -73,4 +73,13 @@ export class DoctorPortalComponent implements OnInit {
   updateSchedule(): void {
     // Update doctor's schedule
   }
+
+  // Phase 4 Integration Methods
+  openVoiceNotes(patientId: string): void {
+    // Open voice notes component for specific patient
+  }
+
+  optimizeSchedule(): void {
+    // Open smart scheduling optimization
+  }
 }

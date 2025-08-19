@@ -7,5 +7,13 @@ export const environment = {
   tokenExpiry: 3600, // 1 hour in seconds
   refreshTokenExpiry: 86400, // 24 hours in seconds
   enableLogging: true,
-  enableServiceWorker: false
+  enableServiceWorker: false,
+  openaiApiKey: 'your-openai-api-key',
+  speechRecognitionLang: 'en-US',
+  aiFeatures: {
+    symptomChecker: true,
+    voiceNotes: true,
+    smartScheduling: true
+  }
 };
+
