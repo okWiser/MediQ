@@ -1,66 +1,54 @@
-<div class="voice-notes">
+<div class="voice-notes-container">
   <mat-card>
     <mat-card-header>
       <mat-card-title>Voice Notes</mat-card-title>
-      <mat-card-subtitle>Record and transcribe patient notes</mat-card-subtitle>
+      <mat-card-subtitle>Record and transcribe voice notes</mat-card-subtitle>
     </mat-card-header>
     
     <mat-card-content>
       <div class="recording-section">
-        <button mat-fab 
-                [color]="isRecording ? 'warn' : 'primary'"
-                (click)="isRecording ? stopRecording() : startRecording()"
-                [disabled]="!patientId">
+        <button 
+          mat-fab 
+          [color]="isRecording ? 'warn' : 'primary'"
+          (click)="isRecording ? stopRecording() : startRecording()"
+          class="record-button">
           <mat-icon>{{isRecording ? 'stop' : 'mic'}}</mat-icon>
         </button>
         
-        <div class="recording-status">
-          <p *ngIf="isRecording" class="recording-indicator">
-            <mat-icon class="pulse">fiber_manual_record</mat-icon>
-            Recording...
-          </p>
-          <p *ngIf="!patientId" class="warning">Select a patient to start recording</p>
+        <div class="recording-status" *ngIf="isRecording">
+          <mat-icon class="pulse">fiber_manual_record</mat-icon>
+          <span>Recording...</span>
         </div>
       </div>
 
       <div class="transcription-section" *ngIf="transcription">
         <h4>Live Transcription:</h4>
-        <mat-card class="transcription-card">
-          <mat-card-content>
-            {{transcription}}
-          </mat-card-content>
-        </mat-card>
+        <div class="transcription-text">
+          {{transcription}}
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
 
-  <mat-card *ngIf="voiceNotes.length > 0" class="notes-list">
-    <mat-card-header>
-      <mat-card-title>Saved Voice Notes</mat-card-title>
-    </mat-card-header>
-    
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let note of voiceNotes">
-          <div class="note-item">
-            <div class="note-header">
-              <span class="timestamp">{{note.timestamp | date:'short'}}</span>
-              <div class="note-actions">
-                <button mat-icon-button (click)="playAudio(note)" *ngIf="note.audioBlob">
-                  <mat-icon>play_arrow</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="deleteNote(note.id)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </div>
-            <div class="note-transcription">
-              {{note.transcription || 'No transcription available'}}
-            </div>
+  <div class="notes-list" *ngIf="voiceNotes.length > 0">
+    <h3>Saved Voice Notes</h3>
+    <mat-card *ngFor="let note of voiceNotes" class="note-card">
+      <mat-card-content>
+        <div class="note-header">
+          <span class="timestamp">{{note.timestamp | date:'short'}}</span>
+          <div class="note-actions">
+            <button mat-icon-button (click)="playAudio(note)" *ngIf="note.audioBlob">
+              <mat-icon>play_arrow</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteNote(note.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+        </div>
+        <div class="transcription">
+          {{note.transcription}}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

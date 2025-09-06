@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import * as AuthActions from './auth.actions';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class AuthEffects {
           email: action.email,
           password: action.password,
           name: action.name,
-          role: action.role
+          role: action.role as 'patient' | 'doctor' | 'admin'
         }).pipe(
           map(response => AuthActions.registerSuccess({ 
             user: response.user, 
