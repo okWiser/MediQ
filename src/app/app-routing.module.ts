@@ -3,13 +3,76 @@ import { RouterModule, Routes } from '@angular/router';
 import { SymptomCheckerComponent } from './features/ai/symptom-checker/symptom-checker.component';
 import { VoiceNotesComponent } from './features/voice-notes/voice-notes.component';
 import { SmartSchedulingComponent } from './features/smart-scheduling/smart-scheduling.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { PatientDashboardComponent } from './features/patient-portal/patient-dashboard.component';
+import { DoctorDashboardComponent } from './features/doctor-portal/doctor-dashboard.component';
+import { AdminDashboardComponent } from './features/admin-portal/admin-dashboard.component';
+import { AppointmentsComponent } from './features/patient-portal/appointments.component';
+import { MedicalRecordsComponent } from './features/patient-portal/medical-records.component';
+import { PatientManagementComponent } from './features/doctor-portal/patient-management.component';
+import { UserManagementComponent } from './features/admin-portal/user-management.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/symptom-checker', pathMatch: 'full' },
-  { path: 'symptom-checker', component: SymptomCheckerComponent },
-  { path: 'voice-notes', component: VoiceNotesComponent },
-  { path: 'smart-scheduling', component: SmartSchedulingComponent },
-  { path: '**', redirectTo: '/symptom-checker' }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { 
+    path: 'patient-dashboard', 
+    component: PatientDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'patient' }
+  },
+  { 
+    path: 'doctor-dashboard', 
+    component: DoctorDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'doctor' }
+  },
+  { 
+    path: 'admin-dashboard', 
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'admin' }
+  },
+  { 
+    path: 'symptom-checker', 
+    component: SymptomCheckerComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'voice-notes', 
+    component: VoiceNotesComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'smart-scheduling', 
+    component: SmartSchedulingComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'appointments', 
+    component: AppointmentsComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'medical-records', 
+    component: MedicalRecordsComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'patients', 
+    component: PatientManagementComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'doctor' }
+  },
+  { 
+    path: 'user-management', 
+    component: UserManagementComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'admin' }
+  },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

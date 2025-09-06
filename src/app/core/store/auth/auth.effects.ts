@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { map, catchError, mergeMap } from 'rxjs/operators';
+import { map, catchError, mergeMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import * as AuthActions from './auth.actions';
 
@@ -9,14 +10,15 @@ import * as AuthActions from './auth.actions';
 export class AuthEffects {
   constructor(
     private actions$: Actions,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
       mergeMap((action) =>
-        this.authService.login(action.email, action.password).pipe(
+        this.authService.login(action.email, action.password, action.role as 'patient' | 'doctor' | 'admin').pipe(
           map(response => AuthActions.loginSuccess({ 
             user: response.user, 
             token: response.token 
@@ -45,5 +47,27 @@ export class AuthEffects {
         )
       )
     )
+  );
+
+  loginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap(({ user }) => {
+        const dashboardRoute = `/${user.role}-dashboard`;
+        this.router.navigate([dashboardRoute]);
+      })
+    ),
+    { dispatch: false }
+  );
+
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.logout),
+      tap(() => {
+        this.authService.logout();
+        this.router.navigate(['/login']);
+      })
+    ),
+    { dispatch: false }
   );
 }

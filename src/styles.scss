@@ -26,6 +26,25 @@ body {
   color: map-get($colors, gray-800);
   background-color: map-get($colors, white);
   @include body-text;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-theme {
+  background-color: #303030;
+  color: #ffffff;
+  
+  .mat-toolbar {
+    background-color: #424242;
+  }
+  
+  .mat-card {
+    background-color: #424242;
+    color: #ffffff;
+  }
+  
+  .main-content {
+    background-color: #303030;
+  }
 }
 
 // Mobile-first responsive typography

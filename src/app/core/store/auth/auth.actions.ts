@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 // Login actions
 export const login = createAction(
   '[Auth] Login',
-  props<{ email: string; password: string }>()
+  props<{ email: string; password: string; role: string }>()
 );
 
 export const loginSuccess = createAction(
@@ -45,3 +45,16 @@ export const refreshTokenFailure = createAction(
   '[Auth] Refresh Token Failure',
   props<{ error: string }>()
 );
+
+export const AuthActions = {
+  login,
+  loginSuccess,
+  loginFailure,
+  register,
+  registerSuccess,
+  registerFailure,
+  logout,
+  refreshToken,
+  refreshTokenSuccess,
+  refreshTokenFailure
+};

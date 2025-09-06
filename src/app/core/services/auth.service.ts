@@ -35,14 +35,35 @@ export class AuthService {
     this.loadCurrentUser();
   }
 
-  login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, { email, password })
-      .pipe(
-        tap(response => this.setAuthData(response)),
-        catchError(error => {
-          throw new Error(error.error?.message || 'Login failed');
-        })
+  login(email: string, password: string, role: 'patient' | 'doctor' | 'admin'): Observable<AuthResponse> {
+    // Mock authentication for demo
+    const mockUsers = {
+      'patient@mediq.com': { role: 'patient', name: 'John Patient' },
+      'doctor@mediq.com': { role: 'doctor', name: 'Dr. Smith' },
+      'admin@mediq.com': { role: 'admin', name: 'Admin User' }
+    };
+
+    const user = mockUsers[email as keyof typeof mockUsers];
+    if (user && password === 'demo123' && user.role === role) {
+      const mockResponse: AuthResponse = {
+        user: {
+          id: '1',
+          email,
+          name: user.name,
+          role: role
+        },
+        token: 'mock-jwt-token',
+        refreshToken: 'mock-refresh-token',
+        expiresIn: 3600
+      };
+      return of(mockResponse).pipe(
+        tap(response => this.setAuthData(response))
       );
+    }
+    
+    return of().pipe(
+      map(() => { throw new Error('Invalid credentials'); })
+    );
   }
 
   register(userData: {

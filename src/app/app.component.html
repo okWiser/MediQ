@@ -2,9 +2,26 @@
   <mat-toolbar-row>
     <span>MediQ Healthcare System</span>
     <span class="spacer"></span>
-    <button mat-button routerLink="/symptom-checker">AI Symptom Checker</button>
-    <button mat-button routerLink="/voice-notes">Voice Notes</button>
-    <button mat-button routerLink="/smart-scheduling">Smart Scheduling</button>
+    <ng-container *ngIf="isAuthenticated$ | async; else loginButton">
+      <ng-container [ngSwitch]="userRole$ | async">
+        <button mat-button *ngSwitchCase="'patient'" routerLink="/patient-dashboard">Dashboard</button>
+        <button mat-button *ngSwitchCase="'doctor'" routerLink="/doctor-dashboard">Dashboard</button>
+        <button mat-button *ngSwitchCase="'admin'" routerLink="/admin-dashboard">Dashboard</button>
+      </ng-container>
+      <button mat-button routerLink="/symptom-checker">AI Symptom Checker</button>
+      <button mat-button routerLink="/voice-notes">Voice Notes</button>
+      <button mat-button routerLink="/smart-scheduling">Smart Scheduling</button>
+      <button mat-icon-button (click)="toggleTheme()">
+        <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+      </button>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-template #loginButton>
+      <button mat-icon-button (click)="toggleTheme()">
+        <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+      </button>
+      <button mat-button routerLink="/login">Login</button>
+    </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
 
