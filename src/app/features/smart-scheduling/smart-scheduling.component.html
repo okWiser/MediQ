@@ -68,15 +68,15 @@
         <div class="available-slots">
           <h4>Available Slots:</h4>
           <div class="slots-grid">
-            <mat-chip-listbox>
-              <mat-chip-option 
+            <mat-chip-set>
+              <mat-chip 
                 *ngFor="let slot of suggestion.availableSlots"
                 [style.border-color]="getPriorityColor(slot.priority)"
                 (click)="bookAppointment(suggestion, slot)">
                 {{slot.date}} at {{slot.time}}
                 <mat-icon *ngIf="slot.priority === 'high'">priority_high</mat-icon>
-              </mat-chip-option>
-            </mat-chip-listbox>
+              </mat-chip>
+            </mat-chip-set>
           </div>
         </div>
       </mat-card-content>
@@ -103,11 +103,11 @@
 
         <div class="suggested-breaks" *ngIf="optimization.suggestedBreaks.length > 0">
           <h4>Suggested Breaks:</h4>
-          <mat-chip-listbox>
-            <mat-chip-option *ngFor="let breakSlot of optimization.suggestedBreaks">
+          <mat-chip-set>
+            <mat-chip *ngFor="let breakSlot of optimization.suggestedBreaks">
               {{breakSlot.date}} at {{breakSlot.time}} ({{breakSlot.duration}}min)
-            </mat-chip-option>
-          </mat-chip-listbox>
+            </mat-chip>
+          </mat-chip-set>
         </div>
 
         <div class="conflict-resolutions" *ngIf="optimization.conflictResolutions.length > 0">

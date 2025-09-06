@@ -27,25 +27,25 @@
         <div class="form-section">
           <h3>Symptoms</h3>
           <div class="common-symptoms">
-            <mat-chip-listbox>
-              <mat-chip-option 
+            <mat-chip-set>
+              <mat-chip 
                 *ngFor="let symptom of commonSymptoms" 
                 (click)="addSymptom(symptom)">
                 {{symptom}}
-              </mat-chip-option>
-            </mat-chip-listbox>
+              </mat-chip>
+            </mat-chip-set>
           </div>
           
           <div class="selected-symptoms" *ngIf="symptomsArray.length > 0">
             <h4>Selected Symptoms:</h4>
-            <mat-chip-listbox>
-              <mat-chip-option 
+            <mat-chip-set>
+              <mat-chip 
                 *ngFor="let symptom of symptomsArray.controls; let i = index"
                 (removed)="removeSymptom(i)">
                 {{symptom.value}}
                 <mat-icon matChipRemove>cancel</mat-icon>
-              </mat-chip-option>
-            </mat-chip-listbox>
+              </mat-chip>
+            </mat-chip-set>
           </div>
         </div>
 
@@ -79,11 +79,11 @@
 
       <div class="possible-conditions">
         <h4>Possible Conditions:</h4>
-        <mat-chip-listbox>
-          <mat-chip-option *ngFor="let condition of analysis.possibleConditions">
+        <mat-chip-set>
+          <mat-chip *ngFor="let condition of analysis.possibleConditions">
             {{condition}}
-          </mat-chip-option>
-        </mat-chip-listbox>
+          </mat-chip>
+        </mat-chip-set>
       </div>
 
       <div class="recommendations">

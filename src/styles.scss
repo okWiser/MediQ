@@ -1,5 +1,8 @@
 /* MediQ Healthcare Management System - Global Styles */
 
+// Import Angular Material theme
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 // Import design system
 @import 'styles/variables';
 @import 'styles/mixins';
