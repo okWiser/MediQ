@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { AuthService, User } from '../../core/services/auth.service';
+import { MockDataService } from '../../core/services/mock-data.service';
 
 @Component({
   selector: 'app-voice-notes',
@@ -79,16 +80,18 @@ export class VoiceNotesComponent implements OnInit {
   currentUser: User | null = null;
   isRecording = false;
   recordingTime = 0;
-  voiceNotes = [
-    { title: 'Morning Symptoms Check', date: '2024-01-15', duration: '2:30' },
-    { title: 'Medication Side Effects', date: '2024-01-14', duration: '1:45' },
-    { title: 'Post-Exercise Notes', date: '2024-01-13', duration: '3:15' }
-  ];
+  voiceNotes: any[] = [];
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private mockDataService: MockDataService
+  ) {}
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
+    if (this.currentUser) {
+      this.voiceNotes = this.mockDataService.getVoiceNotes(this.currentUser.id);
+    }
   }
 
   toggleRecording() {

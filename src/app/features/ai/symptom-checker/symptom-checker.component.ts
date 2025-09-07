@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { AuthService, User } from '../../../core/services/auth.service';
+import { MockDataService } from '../../../core/services/mock-data.service';
 
 @Component({
   selector: 'app-symptom-checker',
@@ -83,21 +84,16 @@ export class SymptomCheckerComponent implements OnInit {
   symptoms = '';
   analysis: any = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private mockDataService: MockDataService
+  ) {}
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
   }
 
   analyzeSymptoms() {
-    // Mock AI analysis
-    this.analysis = {
-      conditions: [
-        { name: 'Common Cold', probability: 75 },
-        { name: 'Tension Headache', probability: 60 },
-        { name: 'Stress/Fatigue', probability: 45 }
-      ],
-      recommendation: 'Based on your symptoms, it appears you may have a common cold. Consider rest, hydration, and over-the-counter medications. If symptoms persist or worsen, please consult with a healthcare provider.'
-    };
+    this.analysis = this.mockDataService.getSymptomAnalysis(this.symptoms);
   }
 }
