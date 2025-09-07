@@ -1,0 +1,173 @@
+// Dark theme overrides
+.dark-theme {
+  // Text colors
+  color: #ffffff !important;
+  
+  // Card backgrounds
+  .mat-mdc-card {
+    background-color: #424242 !important;
+    color: #ffffff !important;
+  }
+  
+  // Table styles
+  .mat-mdc-table {
+    background-color: #424242 !important;
+    color: #ffffff !important;
+  }
+  
+  .mat-mdc-header-cell {
+    color: #ffffff !important;
+  }
+  
+  .mat-mdc-cell {
+    color: #ffffff !important;
+  }
+  
+  // Form field styles
+  .mat-mdc-form-field {
+    .mat-mdc-form-field-label {
+      color: #ffffff !important;
+    }
+    
+    .mat-mdc-input-element {
+      color: #ffffff !important;
+    }
+  }
+  
+  // Chip styles
+  .mat-mdc-chip {
+    &.status-confirmed { background-color: #2e7d32 !important; color: #ffffff !important; }
+    &.status-pending { background-color: #ef6c00 !important; color: #ffffff !important; }
+    &.status-scheduled { background-color: #1565c0 !important; color: #ffffff !important; }
+    &.priority-high { background-color: #c62828 !important; color: #ffffff !important; }
+    &.priority-medium { background-color: #ef6c00 !important; color: #ffffff !important; }
+    &.priority-routine { background-color: #2e7d32 !important; color: #ffffff !important; }
+    &.risk-high { background-color: #c62828 !important; color: #ffffff !important; }
+    &.risk-medium { background-color: #ef6c00 !important; color: #ffffff !important; }
+    &.risk-low { background-color: #2e7d32 !important; color: #ffffff !important; }
+  }
+  
+  // Status text colors
+  .status-confirmed { color: #4caf50 !important; }
+  .status-pending { color: #ff9800 !important; }
+  .status-scheduled { color: #2196f3 !important; }
+  .status-active { color: #4caf50 !important; }
+  .status-completed { color: #4caf50 !important; }
+  .status-in-progress { color: #ff9800 !important; }
+  
+  // Risk level colors
+  .risk-high { color: #f44336 !important; }
+  .risk-medium { color: #ff9800 !important; }
+  .risk-low { color: #4caf50 !important; }
+  
+  // Priority colors
+  .priority-high { color: #f44336 !important; }
+  .priority-medium { color: #ff9800 !important; }
+  .priority-routine { color: #4caf50 !important; }
+  
+  // Metric values
+  .metric-value {
+    color: #64b5f6 !important;
+  }
+  
+  .metric-change {
+    &.positive { color: #4caf50 !important; }
+    &.negative { color: #f44336 !important; }
+  }
+  
+  .metric-detail {
+    color: #b0b0b0 !important;
+  }
+  
+  // Tab content
+  .mat-mdc-tab-body-content {
+    color: #ffffff !important;
+  }
+  
+  // Expansion panel
+  .mat-expansion-panel {
+    background-color: #424242 !important;
+    color: #ffffff !important;
+  }
+  
+  // List items
+  .mat-mdc-list-item {
+    color: #ffffff !important;
+  }
+  
+  // General text elements
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+  }
+  
+  p, span, div {
+    color: #ffffff !important;
+  }
+  
+  // Welcome sections
+  .welcome-section {
+    color: #ffffff !important;
+  }
+  
+  .user-info {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  
+  // Dashboard specific
+  .dashboard-container {
+    color: #ffffff !important;
+  }
+  
+  // Analytics specific
+  .analytics-container {
+    color: #ffffff !important;
+  }
+  
+  // Settings specific
+  .settings-container {
+    color: #ffffff !important;
+  }
+  
+  .info-item {
+    color: #ffffff !important;
+    border-bottom-color: #666 !important;
+  }
+  
+  // Voice notes specific
+  .voice-notes-container {
+    color: #ffffff !important;
+  }
+  
+  .recording-status {
+    color: #f44336 !important;
+  }
+  
+  // AI insights specific
+  .ai-insights-container {
+    color: #ffffff !important;
+  }
+  
+  .subtitle {
+    color: #b0b0b0 !important;
+  }
+  
+  .risk-recommendation,
+  .interaction-description {
+    color: #ffffff !important;
+  }
+  
+  // Schedule specific
+  .schedule-container {
+    color: #ffffff !important;
+  }
+  
+  .stat-label {
+    color: #b0b0b0 !important;
+  }
+  
+  .workload {
+    &.high { color: #f44336 !important; }
+    &.medium { color: #ff9800 !important; }
+    &.light { color: #4caf50 !important; }
+  }
+}
