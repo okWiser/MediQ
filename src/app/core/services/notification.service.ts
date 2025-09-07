@@ -15,69 +15,51 @@ export interface Notification {
   providedIn: 'root'
 })
 export class NotificationService {
-  private notificationsSubject = new BehaviorSubject<Notification[]>([]);
-  public notifications$ = this.notificationsSubject.asObservable();
+  private notifications = new BehaviorSubject<Notification[]>([
+    {
+      id: '1',
+      type: 'warning',
+      title: 'Appointment Reminder',
+      message: 'You have an appointment with Dr. Smith tomorrow at 10:00 AM',
+      timestamp: new Date(),
+      read: false
+    },
+    {
+      id: '2',
+      type: 'info',
+      title: 'Lab Results Available',
+      message: 'Your blood work results are now available',
+      timestamp: new Date(Date.now() - 3600000),
+      read: false
+    }
+  ]);
+  
+  public notifications$ = this.notifications.asObservable();
 
   constructor(private snackBar: MatSnackBar) {}
 
-  showSuccess(message: string, title?: string): void {
-    this.showNotification('success', message, title || 'Success');
-  }
-
-  showError(message: string, title?: string): void {
-    this.showNotification('error', message, title || 'Error');
-  }
-
-  showWarning(message: string, title?: string): void {
-    this.showNotification('warning', message, title || 'Warning');
-  }
-
-  showInfo(message: string, title?: string): void {
-    this.showNotification('info', message, title || 'Info');
-  }
-
-  private showNotification(type: string, message: string, title: string): void {
-    const panelClass = `snackbar-${type}`;
+  showSuccess(message: string) {
     this.snackBar.open(message, 'Close', {
-      duration: 5000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      panelClass: [panelClass]
-    });
-
-    this.addNotification({
-      id: Date.now().toString(),
-      type: type as any,
-      title,
-      message,
-      timestamp: new Date(),
-      read: false
+      duration: 4000,
+      panelClass: ['success-snackbar']
     });
   }
 
-  private addNotification(notification: Notification): void {
-    const current = this.notificationsSubject.value;
-    this.notificationsSubject.next([notification, ...current]);
+  showError(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 6000,
+      panelClass: ['error-snackbar']
+    });
   }
 
-  markAsRead(id: string): void {
-    const notifications = this.notificationsSubject.value.map(n =>
+  getUnreadCount(): number {
+    return this.notifications.value.filter(n => !n.read).length;
+  }
+
+  markAsRead(id: string) {
+    const notifications = this.notifications.value.map(n => 
       n.id === id ? { ...n, read: true } : n
     );
-    this.notificationsSubject.next(notifications);
-  }
-
-  markAllAsRead(): void {
-    const notifications = this.notificationsSubject.value.map(n => ({ ...n, read: true }));
-    this.notificationsSubject.next(notifications);
-  }
-
-  clearNotification(id: string): void {
-    const notifications = this.notificationsSubject.value.filter(n => n.id !== id);
-    this.notificationsSubject.next(notifications);
-  }
-
-  clearAll(): void {
-    this.notificationsSubject.next([]);
+    this.notifications.next(notifications);
   }
 }

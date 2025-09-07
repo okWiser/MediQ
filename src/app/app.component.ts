@@ -7,6 +7,7 @@ import { AppState } from './core/store';
 import { selectIsAuthenticated, selectUserRole } from './core/store/auth/auth.selectors';
 import { AuthActions } from './core/store/auth/auth.actions';
 import { ThemeService } from './core/services/theme.service';
+import { NotificationService, Notification } from './core/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,15 @@ export class AppComponent implements OnInit {
   userRole$: Observable<string | null>;
   isDarkTheme$: Observable<boolean>;
   canGoBack = false;
+  notifications: Notification[] = [];
+  unreadCount = 0;
 
   constructor(
     private store: Store<AppState>,
     private themeService: ThemeService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {
     this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
     this.userRole$ = this.store.select(selectUserRole);
@@ -37,10 +41,28 @@ export class AppComponent implements OnInit {
         this.canGoBack = !['/', '/login', '/patient-dashboard', '/doctor-dashboard', '/admin-dashboard'].includes(event.url);
       }
     });
+    
+    this.notificationService.notifications$.subscribe(notifications => {
+      this.notifications = notifications;
+      this.unreadCount = this.notificationService.getUnreadCount();
+    });
   }
 
   goBack() {
     this.location.back();
+  }
+
+  markAsRead(id: string) {
+    this.notificationService.markAsRead(id);
+  }
+
+  getNotificationIcon(type: string): string {
+    switch (type) {
+      case 'warning': return 'warning';
+      case 'error': return 'error';
+      case 'success': return 'check_circle';
+      default: return 'info';
+    }
   }
 
   logout() {
