@@ -11,6 +11,9 @@ import { AppointmentsComponent } from './features/patient-portal/appointments.co
 import { MedicalRecordsComponent } from './features/patient-portal/medical-records.component';
 import { PatientManagementComponent } from './features/doctor-portal/patient-management.component';
 import { UserManagementComponent } from './features/admin-portal/user-management.component';
+import { HospitalManagementComponent } from './features/admin-portal/hospital-management.component';
+import { AnalyticsComponent } from './features/admin-portal/analytics.component';
+import { SystemSettingsComponent } from './features/admin-portal/system-settings.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 
@@ -69,6 +72,24 @@ const routes: Routes = [
   { 
     path: 'user-management', 
     component: UserManagementComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'admin' }
+  },
+  { 
+    path: 'hospital-management', 
+    component: HospitalManagementComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'admin' }
+  },
+  { 
+    path: 'analytics', 
+    component: AnalyticsComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'admin' }
+  },
+  { 
+    path: 'system-settings', 
+    component: SystemSettingsComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'admin' }
   },
