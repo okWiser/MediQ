@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { AuthService, User } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-appointments',
@@ -39,6 +40,13 @@ import { MatTableModule } from '@angular/material/table';
               <td mat-cell *matCellDef="let appointment">{{appointment.type}}</td>
             </ng-container>
             
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let appointment">
+                <span [class]="'status-' + appointment.status.toLowerCase()">{{appointment.status}}</span>
+              </td>
+            </ng-container>
+            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
@@ -53,12 +61,38 @@ import { MatTableModule } from '@angular/material/table';
     .appointments-table {
       width: 100%;
     }
+    .status-confirmed {
+      color: #4caf50;
+      font-weight: 500;
+    }
+    .status-pending {
+      color: #ff9800;
+      font-weight: 500;
+    }
   `]
 })
-export class AppointmentsComponent {
-  displayedColumns = ['date', 'time', 'doctor', 'type'];
-  appointments = [
-    { date: '2024-01-15', time: '10:00 AM', doctor: 'Dr. Smith', type: 'Checkup' },
-    { date: '2024-01-20', time: '2:30 PM', doctor: 'Dr. Johnson', type: 'Follow-up' }
-  ];
+export class AppointmentsComponent implements OnInit {
+  displayedColumns = ['date', 'time', 'doctor', 'type', 'status'];
+  appointments: any[] = [];
+  currentUser: User | null = null;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+    this.loadAppointments();
+  }
+
+  private loadAppointments() {
+    // Mock appointments based on user
+    const mockAppointments = {
+      'p001': [
+        { date: '2024-01-15', time: '10:00 AM', doctor: 'Dr. Sarah Smith', type: 'Annual Checkup', status: 'Confirmed' },
+        { date: '2024-01-20', time: '2:30 PM', doctor: 'Dr. Michael Johnson', type: 'Follow-up', status: 'Pending' },
+        { date: '2024-01-25', time: '9:15 AM', doctor: 'Dr. Emily Davis', type: 'Lab Results Review', status: 'Confirmed' }
+      ]
+    };
+    
+    this.appointments = mockAppointments[this.currentUser?.id as keyof typeof mockAppointments] || [];
+  }
 }

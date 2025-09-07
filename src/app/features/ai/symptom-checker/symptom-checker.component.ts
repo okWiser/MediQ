@@ -1,76 +1,103 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { AiService, SymptomAnalysis } from '../../../core/services/ai.service';
-import { NotificationService } from '../../../core/services/notification.service';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { AuthService, User } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-symptom-checker',
-  templateUrl: './symptom-checker.component.html',
-  styleUrls: ['./symptom-checker.component.scss']
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule],
+  template: `
+    <div class="symptom-checker-container">
+      <h1>AI Symptom Checker</h1>
+      <p class="welcome-text">Welcome {{currentUser?.name}}, describe your symptoms for AI analysis</p>
+      
+      <mat-card class="input-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>health_and_safety</mat-icon>
+          <mat-card-title>Describe Your Symptoms</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Enter your symptoms</mat-label>
+            <textarea matInput [(ngModel)]="symptoms" rows="4" 
+                      placeholder="e.g., I have a headache and feel tired..."></textarea>
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="analyzeSymptoms()" [disabled]="!symptoms">
+            Analyze Symptoms
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card *ngIf="analysis" class="results-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar color="primary">psychology</mat-icon>
+          <mat-card-title>AI Analysis Results</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="analysis-result">
+            <h3>Possible Conditions:</h3>
+            <ul>
+              <li *ngFor="let condition of analysis.conditions">
+                {{condition.name}} ({{condition.probability}}% probability)
+              </li>
+            </ul>
+            <h3>Recommendations:</h3>
+            <p>{{analysis.recommendation}}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  `,
+  styles: [`
+    .symptom-checker-container {
+      padding: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .welcome-text {
+      color: #666;
+      margin-bottom: 24px;
+    }
+    .input-card, .results-card {
+      margin-bottom: 24px;
+    }
+    .full-width {
+      width: 100%;
+    }
+    .analysis-result h3 {
+      color: #1976d2;
+      margin-top: 16px;
+    }
+  `]
 })
 export class SymptomCheckerComponent implements OnInit {
-  symptomForm: FormGroup;
-  analysis: SymptomAnalysis | null = null;
-  isAnalyzing = false;
-  
-  commonSymptoms = [
-    'Headache', 'Fever', 'Cough', 'Fatigue', 'Nausea', 'Dizziness',
-    'Chest pain', 'Shortness of breath', 'Abdominal pain', 'Joint pain'
-  ];
+  currentUser: User | null = null;
+  symptoms = '';
+  analysis: any = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private aiService: AiService,
-    private notificationService: NotificationService
-  ) {
-    this.symptomForm = this.fb.group({
-      symptoms: this.fb.array([], Validators.required),
-      age: ['', [Validators.min(1), Validators.max(120)]],
-      gender: ['']
-    });
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
   }
 
-  ngOnInit(): void {}
-
-  get symptomsArray(): FormArray {
-    return this.symptomForm.get('symptoms') as FormArray;
-  }
-
-  addSymptom(symptom: string): void {
-    if (!this.symptomsArray.value.includes(symptom)) {
-      this.symptomsArray.push(this.fb.control(symptom));
-    }
-  }
-
-  removeSymptom(index: number): void {
-    this.symptomsArray.removeAt(index);
-  }
-
-  analyzeSymptoms(): void {
-    if (this.symptomForm.valid && this.symptomsArray.length > 0) {
-      this.isAnalyzing = true;
-      const { symptoms, age, gender } = this.symptomForm.value;
-      
-      this.aiService.analyzeSymptoms(symptoms, age, gender).subscribe({
-        next: (analysis) => {
-          this.analysis = analysis;
-          this.isAnalyzing = false;
-        },
-        error: (error) => {
-          this.notificationService.showError('Failed to analyze symptoms. Please try again.');
-          this.isAnalyzing = false;
-        }
-      });
-    }
-  }
-
-  getSeverityColor(severity: string): string {
-    const colors = {
-      low: '#28a745',
-      medium: '#ffc107', 
-      high: '#fd7e14',
-      emergency: '#dc3545'
+  analyzeSymptoms() {
+    // Mock AI analysis
+    this.analysis = {
+      conditions: [
+        { name: 'Common Cold', probability: 75 },
+        { name: 'Tension Headache', probability: 60 },
+        { name: 'Stress/Fatigue', probability: 45 }
+      ],
+      recommendation: 'Based on your symptoms, it appears you may have a common cold. Consider rest, hydration, and over-the-counter medications. If symptoms persist or worsen, please consult with a healthcare provider.'
     };
-    return colors[severity as keyof typeof colors] || '#6c757d';
   }
 }

@@ -4,13 +4,29 @@
     <span class="spacer"></span>
     <ng-container *ngIf="isAuthenticated$ | async; else loginButton">
       <ng-container [ngSwitch]="userRole$ | async">
-        <button mat-button *ngSwitchCase="'patient'" routerLink="/patient-dashboard">Dashboard</button>
-        <button mat-button *ngSwitchCase="'doctor'" routerLink="/doctor-dashboard">Dashboard</button>
-        <button mat-button *ngSwitchCase="'admin'" routerLink="/admin-dashboard">Dashboard</button>
+        <!-- Patient Navigation -->
+        <ng-container *ngSwitchCase="'patient'">
+          <button mat-button routerLink="/patient-dashboard">Dashboard</button>
+          <button mat-button routerLink="/appointments">Appointments</button>
+          <button mat-button routerLink="/medical-records">Records</button>
+          <button mat-button routerLink="/symptom-checker">AI Checker</button>
+        </ng-container>
+        
+        <!-- Doctor Navigation -->
+        <ng-container *ngSwitchCase="'doctor'">
+          <button mat-button routerLink="/doctor-dashboard">Dashboard</button>
+          <button mat-button routerLink="/patients">Patients</button>
+          <button mat-button routerLink="/smart-scheduling">Schedule</button>
+          <button mat-button routerLink="/voice-notes">Voice Notes</button>
+        </ng-container>
+        
+        <!-- Admin Navigation -->
+        <ng-container *ngSwitchCase="'admin'">
+          <button mat-button routerLink="/admin-dashboard">Dashboard</button>
+          <button mat-button routerLink="/user-management">Users</button>
+          <button mat-button routerLink="/smart-scheduling">System</button>
+        </ng-container>
       </ng-container>
-      <button mat-button routerLink="/symptom-checker">AI Symptom Checker</button>
-      <button mat-button routerLink="/voice-notes">Voice Notes</button>
-      <button mat-button routerLink="/smart-scheduling">Smart Scheduling</button>
       <button mat-icon-button (click)="toggleTheme()">
         <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
       </button>

@@ -8,7 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { AuthActions } from '../../../core/store/auth/auth.actions';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ import { AuthActions } from '../../../core/store/auth/auth.actions';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   template: `
     <div class="login-container">
@@ -29,6 +32,13 @@ import { AuthActions } from '../../../core/store/auth/auth.actions';
           <mat-card-title>MediQ Login</mat-card-title>
         </mat-card-header>
         <mat-card-content>
+          <div class="demo-info">
+            <p><strong>Demo Credentials:</strong></p>
+            <p>Patient: patient@mediq.com / demo123</p>
+            <p>Doctor: doctor@mediq.com / demo123</p>
+            <p>Admin: admin@mediq.com / demo123</p>
+          </div>
+          
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Email</mat-label>
@@ -49,8 +59,8 @@ import { AuthActions } from '../../../core/store/auth/auth.actions';
               </mat-select>
             </mat-form-field>
             
-            <button mat-raised-button color="primary" type="submit" class="full-width">
-              Login
+            <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="isLoading">
+              {{isLoading ? 'Logging in...' : 'Login'}}
             </button>
           </form>
         </mat-card-content>
@@ -73,27 +83,65 @@ import { AuthActions } from '../../../core/store/auth/auth.actions';
       width: 100%;
       margin-bottom: 16px;
     }
+    .demo-info {
+      background-color: #f5f5f5;
+      padding: 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+    .demo-info p {
+      margin: 4px 0;
+    }
   `]
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
+  isLoading = false;
+
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['patient@mediq.com', [Validators.required, Validators.email]],
+      password: ['demo123', [Validators.required]],
       role: ['patient', Validators.required]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.isLoading = true;
       const { email, password, role } = this.loginForm.value;
-      this.store.dispatch(AuthActions.login({ email, password, role }));
+      
+      this.authService.login(email, password, role).subscribe({
+        next: (response) => {
+          this.store.dispatch(AuthActions.loginSuccess({ 
+            user: response.user, 
+            token: response.token 
+          }));
+          
+          // Navigate based on role
+          const dashboardRoute = `/${role}-dashboard`;
+          this.router.navigate([dashboardRoute]);
+          
+          this.snackBar.open(`Welcome ${response.user.name}!`, 'Close', {
+            duration: 3000
+          });
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.snackBar.open('Invalid credentials. Please try again.', 'Close', {
+            duration: 3000
+          });
+          this.isLoading = false;
+        }
+      });
     }
   }
 }

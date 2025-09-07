@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { AuthService, User } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -11,7 +12,11 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, RouterModule],
   template: `
     <div class="dashboard-container">
-      <h1>Doctor Dashboard</h1>
+      <div class="welcome-section">
+        <h1>Welcome, {{currentUser?.name}}!</h1>
+        <p class="user-info">{{currentUser?.specialization}} | License: {{currentUser?.medicalLicense}}</p>
+        <p class="stats">Today's Appointments: 8 | Pending Reviews: 3</p>
+      </div>
       
       <div class="dashboard-grid">
         <mat-card class="dashboard-card">
@@ -80,6 +85,17 @@ import { RouterModule } from '@angular/router';
     .dashboard-container {
       padding: 24px;
     }
+    .welcome-section {
+      margin-bottom: 32px;
+      padding: 20px;
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+      border-radius: 8px;
+    }
+    .user-info, .stats {
+      opacity: 0.9;
+      margin: 8px 0 0 0;
+    }
     .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -91,4 +107,11 @@ import { RouterModule } from '@angular/router';
     }
   `]
 })
-export class DoctorDashboardComponent {}
+export class DoctorDashboardComponent implements OnInit {
+  currentUser: User | null = null;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+  }

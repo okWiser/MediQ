@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { AuthService, User } from '../../core/services/auth.service';
+import { MockDataService } from '../../core/services/mock-data.service';
 
 @Component({
   selector: 'app-patient-management',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatTableModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatTableModule],
   template: `
-    <div class="container">
+    <div class="patients-container">
       <h1>Patient Management</h1>
       
       <mat-card>
@@ -18,9 +20,9 @@ import { MatIconModule } from '@angular/material/icon';
           <mat-card-title>My Patients</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <table mat-table [dataSource]="patients">
+          <table mat-table [dataSource]="patients" class="patients-table">
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <th mat-header-cell *matHeaderCellDef>Patient Name</th>
               <td mat-cell *matCellDef="let patient">{{patient.name}}</td>
             </ng-container>
             
@@ -29,21 +31,20 @@ import { MatIconModule } from '@angular/material/icon';
               <td mat-cell *matCellDef="let patient">{{patient.age}}</td>
             </ng-container>
             
-            <ng-container matColumnDef="condition">
-              <th mat-header-cell *matHeaderCellDef>Condition</th>
-              <td mat-cell *matCellDef="let patient">{{patient.condition}}</td>
-            </ng-container>
-            
             <ng-container matColumnDef="lastVisit">
               <th mat-header-cell *matHeaderCellDef>Last Visit</th>
               <td mat-cell *matCellDef="let patient">{{patient.lastVisit}}</td>
             </ng-container>
             
+            <ng-container matColumnDef="condition">
+              <th mat-header-cell *matHeaderCellDef>Condition</th>
+              <td mat-cell *matCellDef="let patient">{{patient.condition}}</td>
+            </ng-container>
+            
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let patient">
-                <button mat-icon-button><mat-icon>visibility</mat-icon></button>
-                <button mat-icon-button><mat-icon>edit</mat-icon></button>
+                <button mat-button color="primary">View Records</button>
               </td>
             </ng-container>
             
@@ -55,15 +56,28 @@ import { MatIconModule } from '@angular/material/icon';
     </div>
   `,
   styles: [`
-    .container { padding: 24px; }
-    table { width: 100%; }
+    .patients-container {
+      padding: 24px;
+    }
+    .patients-table {
+      width: 100%;
+    }
   `]
 })
-export class PatientManagementComponent {
-  displayedColumns = ['name', 'age', 'condition', 'lastVisit', 'actions'];
-  patients = [
-    { name: 'John Doe', age: 45, condition: 'Hypertension', lastVisit: '2024-01-10' },
-    { name: 'Jane Smith', age: 32, condition: 'Diabetes', lastVisit: '2024-01-08' },
-    { name: 'Bob Johnson', age: 67, condition: 'Arthritis', lastVisit: '2024-01-05' }
-  ];
+export class PatientManagementComponent implements OnInit {
+  displayedColumns = ['name', 'age', 'lastVisit', 'condition', 'actions'];
+  patients: any[] = [];
+  currentUser: User | null = null;
+
+  constructor(
+    private authService: AuthService,
+    private mockDataService: MockDataService
+  ) {}
+
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+    if (this.currentUser) {
+      this.patients = this.mockDataService.getDoctorPatients(this.currentUser.id);
+    }
+  }
 }

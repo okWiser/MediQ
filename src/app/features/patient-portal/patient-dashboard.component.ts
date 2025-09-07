@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { AuthService, User } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -11,7 +12,10 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, RouterModule],
   template: `
     <div class="dashboard-container">
-      <h1>Patient Dashboard</h1>
+      <div class="welcome-section">
+        <h1>Welcome back, {{currentUser?.name}}!</h1>
+        <p class="user-info">Patient ID: {{currentUser?.id}} | Last login: {{lastLogin}}</p>
+      </div>
       
       <div class="dashboard-grid">
         <mat-card class="dashboard-card">
@@ -80,6 +84,17 @@ import { RouterModule } from '@angular/router';
     .dashboard-container {
       padding: 24px;
     }
+    .welcome-section {
+      margin-bottom: 32px;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 8px;
+    }
+    .user-info {
+      opacity: 0.9;
+      margin: 8px 0 0 0;
+    }
     .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -91,4 +106,12 @@ import { RouterModule } from '@angular/router';
     }
   `]
 })
-export class PatientDashboardComponent {}
+export class PatientDashboardComponent implements OnInit {
+  currentUser: User | null = null;
+  lastLogin = new Date().toLocaleDateString();
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+  }

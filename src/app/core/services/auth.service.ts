@@ -38,19 +38,42 @@ export class AuthService {
   login(email: string, password: string, role: 'patient' | 'doctor' | 'admin'): Observable<AuthResponse> {
     // Mock authentication for demo
     const mockUsers = {
-      'patient@mediq.com': { role: 'patient', name: 'John Patient' },
-      'doctor@mediq.com': { role: 'doctor', name: 'Dr. Smith' },
-      'admin@mediq.com': { role: 'admin', name: 'Admin User' }
+      'patient@mediq.com': { 
+        role: 'patient', 
+        name: 'John Patient',
+        phone: '+1-555-0123',
+        dateOfBirth: '1985-06-15',
+        avatar: 'assets/avatars/patient.jpg'
+      },
+      'doctor@mediq.com': { 
+        role: 'doctor', 
+        name: 'Dr. Sarah Smith',
+        phone: '+1-555-0456',
+        medicalLicense: 'MD-12345',
+        specialization: 'Internal Medicine',
+        avatar: 'assets/avatars/doctor.jpg'
+      },
+      'admin@mediq.com': { 
+        role: 'admin', 
+        name: 'Admin User',
+        phone: '+1-555-0789',
+        avatar: 'assets/avatars/admin.jpg'
+      }
     };
 
     const user = mockUsers[email as keyof typeof mockUsers];
     if (user && password === 'demo123' && user.role === role) {
       const mockResponse: AuthResponse = {
         user: {
-          id: '1',
+          id: role === 'patient' ? 'p001' : role === 'doctor' ? 'd001' : 'a001',
           email,
           name: user.name,
-          role: role
+          role: role,
+          phone: user.phone,
+          dateOfBirth: user.dateOfBirth,
+          medicalLicense: user.medicalLicense,
+          specialization: user.specialization,
+          avatar: user.avatar
         },
         token: 'mock-jwt-token',
         refreshToken: 'mock-refresh-token',

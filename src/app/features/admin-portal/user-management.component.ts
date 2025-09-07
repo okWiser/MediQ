@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
+import { AuthService, User } from '../../core/services/auth.service';
+import { MockDataService } from '../../core/services/mock-data.service';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatTableModule, MatButtonModule, MatIconModule, MatChipsModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatTableModule, MatChipsModule],
   template: `
-    <div class="container">
+    <div class="users-container">
       <h1>User Management</h1>
       
       <mat-card>
         <mat-card-header>
           <mat-card-title>System Users</mat-card-title>
+          <mat-card-subtitle>Manage all users in the system</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <table mat-table [dataSource]="users">
+          <table mat-table [dataSource]="users" class="users-table">
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>Name</th>
               <td mat-cell *matCellDef="let user">{{user.name}}</td>
@@ -33,28 +36,22 @@ import { MatChipsModule } from '@angular/material/chips';
             <ng-container matColumnDef="role">
               <th mat-header-cell *matHeaderCellDef>Role</th>
               <td mat-cell *matCellDef="let user">
-                <mat-chip-set>
-                  <mat-chip [color]="getRoleColor(user.role)">{{user.role}}</mat-chip>
-                </mat-chip-set>
+                <mat-chip [class]="'role-' + user.role">{{user.role | titlecase}}</mat-chip>
               </td>
             </ng-container>
             
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef>Status</th>
               <td mat-cell *matCellDef="let user">
-                <mat-chip-set>
-                  <mat-chip [color]="user.active ? 'primary' : 'warn'">
-                    {{user.active ? 'Active' : 'Inactive'}}
-                  </mat-chip>
-                </mat-chip-set>
+                <mat-chip [class]="'status-' + user.status.toLowerCase()">{{user.status}}</mat-chip>
               </td>
             </ng-container>
             
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let user">
-                <button mat-icon-button><mat-icon>edit</mat-icon></button>
-                <button mat-icon-button><mat-icon>delete</mat-icon></button>
+                <button mat-button color="primary">Edit</button>
+                <button mat-button color="warn">Deactivate</button>
               </td>
             </ng-container>
             
@@ -66,25 +63,40 @@ import { MatChipsModule } from '@angular/material/chips';
     </div>
   `,
   styles: [`
-    .container { padding: 24px; }
-    table { width: 100%; }
+    .users-container {
+      padding: 24px;
+    }
+    .users-table {
+      width: 100%;
+    }
+    .role-patient {
+      background-color: #e3f2fd;
+      color: #1976d2;
+    }
+    .role-doctor {
+      background-color: #e8f5e8;
+      color: #388e3c;
+    }
+    .role-admin {
+      background-color: #fff3e0;
+      color: #f57c00;
+    }
+    .status-active {
+      background-color: #e8f5e8;
+      color: #388e3c;
+    }
   `]
 })
-export class UserManagementComponent {
+export class UserManagementComponent implements OnInit {
   displayedColumns = ['name', 'email', 'role', 'status', 'actions'];
-  users = [
-    { name: 'Dr. Smith', email: 'doctor@mediq.com', role: 'doctor', active: true },
-    { name: 'John Patient', email: 'patient@mediq.com', role: 'patient', active: true },
-    { name: 'Admin User', email: 'admin@mediq.com', role: 'admin', active: true },
-    { name: 'Dr. Johnson', email: 'johnson@mediq.com', role: 'doctor', active: false }
-  ];
+  users: any[] = [];
 
-  getRoleColor(role: string): string {
-    switch(role) {
-      case 'admin': return 'warn';
-      case 'doctor': return 'primary';
-      case 'patient': return 'accent';
-      default: return '';
-    }
+  constructor(
+    private authService: AuthService,
+    private mockDataService: MockDataService
+  ) {}
+
+  ngOnInit() {
+    this.users = this.mockDataService.getSystemUsers();
   }
 }
