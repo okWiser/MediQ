@@ -47,7 +47,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
             <mat-card-title>Monthly Revenue</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <div class="metric-value">${{metrics.revenue | number}}</div>
+            <div class="metric-value">\${{metrics.revenue | number}}</div>
             <div class="metric-change positive">+15% vs last month</div>
             <div class="metric-detail">$2.1M YTD target: 89%</div>
           </mat-card-content>
