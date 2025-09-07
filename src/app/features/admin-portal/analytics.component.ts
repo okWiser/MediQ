@@ -233,3 +233,4 @@ export class AnalyticsComponent implements OnInit {
     
     this.snackBar.open(`Generating ${reportNames[type as keyof typeof reportNames]}...`, 'Close', { duration: 3000 });
   }
+}
