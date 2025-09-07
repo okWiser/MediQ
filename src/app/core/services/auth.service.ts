@@ -70,9 +70,9 @@ export class AuthService {
           name: user.name,
           role: role,
           phone: user.phone,
-          dateOfBirth: user.dateOfBirth,
-          medicalLicense: user.medicalLicense,
-          specialization: user.specialization,
+          dateOfBirth: (user as any).dateOfBirth,
+          medicalLicense: (user as any).medicalLicense,
+          specialization: (user as any).specialization,
           avatar: user.avatar
         },
         token: 'mock-jwt-token',

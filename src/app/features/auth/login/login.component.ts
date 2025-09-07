@@ -34,9 +34,9 @@ import { AuthService } from '../../../core/services/auth.service';
         <mat-card-content>
           <div class="demo-info">
             <p><strong>Demo Credentials:</strong></p>
-            <p>Patient: patient@mediq.com / demo123</p>
-            <p>Doctor: doctor@mediq.com / demo123</p>
-            <p>Admin: admin@mediq.com / demo123</p>
+            <p>Patient: patient&#64;mediq.com / demo123</p>
+            <p>Doctor: doctor&#64;mediq.com / demo123</p>
+            <p>Admin: admin&#64;mediq.com / demo123</p>
           </div>
           
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">

@@ -19,10 +19,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { SecurityInterceptor } from './core/interceptors/security.interceptor';
 import { environment } from '../environments/environment';
 
-// Phase 4 Components
-import { SymptomCheckerComponent } from './features/ai/symptom-checker/symptom-checker.component';
-import { VoiceNotesComponent } from './features/voice-notes/voice-notes.component';
-import { SmartSchedulingComponent } from './features/smart-scheduling/smart-scheduling.component';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -31,10 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SymptomCheckerComponent,
-    VoiceNotesComponent,
-    SmartSchedulingComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

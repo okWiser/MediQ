@@ -141,3 +141,4 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
   }
+}

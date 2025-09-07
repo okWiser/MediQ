@@ -115,3 +115,4 @@ export class PatientDashboardComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
   }
+}
