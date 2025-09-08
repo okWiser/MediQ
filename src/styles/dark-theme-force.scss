@@ -1,46 +1,52 @@
-// Force all text to be visible in dark theme
+// Fix dark theme with proper background and text colors
 .dark-theme {
-  // Nuclear option - force everything to be light colored
-  * {
-    color: #ffffff !important;
-  }
-  
-  // Override any possible dark text
-  *[style*="color"] {
-    color: #ffffff !important;
-  }
-  
-  // Force all Material components
+  // Ensure dark backgrounds for all cards
   .mat-mdc-card,
+  .mat-card {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+  }
+  
+  // Force dark background for any white backgrounds
+  *[style*="background-color: white"],
+  *[style*="background-color: #fff"],
+  *[style*="background-color: #ffffff"],
+  *[style*="background: white"],
+  *[style*="background: #fff"],
+  *[style*="background: #ffffff"] {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+  }
+  
+  // Ensure all card content has proper colors
   .mat-mdc-card *,
-  .mat-card,
-  .mat-card *,
-  .mat-typography,
-  .mat-typography * {
+  .mat-card * {
     color: #ffffff !important;
   }
   
-  // Force all text elements
+  // Override any white backgrounds in components
+  .dashboard-card,
+  .metric-card,
+  .overview-card,
+  .analysis-card,
+  .recommendation-card,
+  .interaction-card {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+  }
+  
+  // Force all text to be white on dark backgrounds
   p, span, div, h1, h2, h3, h4, h5, h6,
-  label, input, textarea, select, option,
-  .mat-body, .mat-body-1, .mat-body-2,
-  .mat-caption, .mat-small {
+  label, input, textarea, select, option {
     color: #ffffff !important;
   }
   
-  // Override computed styles
+  // Override Material Design components
   .mat-mdc-card-content,
   .mat-mdc-card-title,
   .mat-mdc-card-subtitle,
   .mat-mdc-card-header {
-    color: #ffffff !important;
-  }
-  
-  // Force all containers
-  .dashboard-container *,
-  .analytics-container *,
-  .profile-container *,
-  .login-container * {
+    background-color: transparent !important;
     color: #ffffff !important;
   }
 }
