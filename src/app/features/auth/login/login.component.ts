@@ -153,6 +153,13 @@ export class LoginComponent {
       email: ['patient@mediq.com', [Validators.required, Validators.email]],
       password: ['demo123', [Validators.required, Validators.minLength(6)]]
     });
+    
+    // Check if user is already authenticated
+    if (this.authService.isAuthenticated()) {
+      const user = this.authService.getCurrentUser();
+      const dashboardRoute = `/${user?.role}-dashboard`;
+      this.router.navigate([dashboardRoute]);
+    }
   }
 
   onSubmit() {
