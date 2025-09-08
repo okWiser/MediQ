@@ -68,30 +68,37 @@ export class AuthService {
     };
 
     const user = mockUsers[email as keyof typeof mockUsers];
-    if (user && password === 'demo123') {
-      const mockResponse: AuthResponse = {
-        user: {
-          id: role === 'patient' ? 'p001' : role === 'doctor' ? 'd001' : 'a001',
-          email,
-          name: user.name,
-          role: user.role === 'Chief Technology & Innovation Officer' ? 'admin' : user.role as 'patient' | 'doctor' | 'admin',
-          phone: user.phone,
-          dateOfBirth: (user as any).dateOfBirth,
-          medicalLicense: (user as any).medicalLicense,
-          specialization: (user as any).specialization,
-          avatar: user.avatar
-        },
-        token: 'mock-jwt-token',
-        refreshToken: 'mock-refresh-token',
-        expiresIn: 3600
-      };
-      return of(mockResponse).pipe(
-        tap(response => this.setAuthData(response))
+    
+    if (!user) {
+      return of().pipe(
+        map(() => { throw new Error('Email address not found. Please check your email and try again.'); })
       );
     }
     
-    return of().pipe(
-      map(() => { throw new Error('Invalid credentials'); })
+    if (password !== 'demo123') {
+      return of().pipe(
+        map(() => { throw new Error('Incorrect password. Please check your password and try again.'); })
+      );
+    }
+    
+    const mockResponse: AuthResponse = {
+      user: {
+        id: role === 'patient' ? 'p001' : role === 'doctor' ? 'd001' : 'a001',
+        email,
+        name: user.name,
+        role: user.role === 'Chief Technology & Innovation Officer' ? 'admin' : user.role as 'patient' | 'doctor' | 'admin',
+        phone: user.phone,
+        dateOfBirth: (user as any).dateOfBirth,
+        medicalLicense: (user as any).medicalLicense,
+        specialization: (user as any).specialization,
+        avatar: user.avatar
+      },
+      token: 'mock-jwt-token',
+      refreshToken: 'mock-refresh-token',
+      expiresIn: 3600
+    };
+    return of(mockResponse).pipe(
+      tap(response => this.setAuthData(response))
     );
   }
 

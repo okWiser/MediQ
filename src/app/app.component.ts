@@ -41,6 +41,11 @@ export class AppComponent implements OnInit {
     const user = this.authService.getCurrentUser();
     if (token && user) {
       this.store.dispatch(AuthActions.loginSuccess({ user, token }));
+      // Only redirect if not on login page
+      if (this.router.url === '/login') {
+        const dashboardRoute = `/${user.role}-dashboard`;
+        this.router.navigate([dashboardRoute]);
+      }
     }
   }
 

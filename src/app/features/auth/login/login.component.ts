@@ -201,19 +201,15 @@ export class LoginComponent {
         clearTimeout(loginTimeout);
         this.isLoading = false;
         
-        // Enhanced error handling
-        if (error.message.includes('Invalid credentials')) {
-          this.errorMessage = 'Invalid email or password. Please check your credentials.';
-        } else {
-          this.errorMessage = 'Login failed. Please check your credentials.';
-        }
+        // Show specific error message from auth service
+        this.errorMessage = error.message || 'Login failed. Please try again.';
         
         this.snackBar.open(this.errorMessage, 'Close', {
           duration: 5000,
           panelClass: ['error-snackbar']
         });
         
-        // Reset form on error
+        // Reset password field on error
         this.loginForm.get('password')?.setValue('');
       }
     });
