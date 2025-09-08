@@ -85,7 +85,7 @@ import { MatTableModule } from '@angular/material/table';
     }
     .prescription-header {
       display: flex;
-      justify-content: between;
+      justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
     }
@@ -94,10 +94,30 @@ import { MatTableModule } from '@angular/material/table';
       font-weight: 600;
       color: var(--premium-text);
     }
+    .indication {
+      font-size: 12px;
+      color: var(--premium-text-muted);
+    }
     .prescription-details {
       display: flex;
-      gap: 24px;
+      flex-direction: column;
+      gap: 12px;
       margin-bottom: 16px;
+    }
+    .detail-row {
+      display: flex;
+      gap: 24px;
+    }
+    .instructions, .side-effects {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: var(--premium-text-muted);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .instructions mat-icon, .side-effects mat-icon {
+      margin-top: 2px;
     }
     .detail-item {
       display: flex;
