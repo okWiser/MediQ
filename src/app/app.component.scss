@@ -3,6 +3,32 @@
 }
 
 .main-content {
-  padding: 20px;
+  padding: 0;
   min-height: calc(100vh - 64px);
+}
+
+.notification-menu {
+  max-width: 350px;
+}
+
+.notification-header {
+  padding: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f5f5f5;
+}
+
+.notification-content {
+  margin-left: 8px;
+}
+
+.notification-title {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.notification-message {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
 }
