@@ -33,6 +33,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.loadCurrentUser();
+    // Check if user is already logged in on app initialization
+    const token = this.getToken();
+    if (token && this.currentUserSubject.value) {
+      // User is authenticated, maintain login state
+    }
   }
 
   login(email: string, password: string, role: 'patient' | 'doctor' | 'admin'): Observable<AuthResponse> {
