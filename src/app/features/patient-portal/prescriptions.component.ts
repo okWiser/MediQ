@@ -60,9 +60,9 @@ import { MatTableModule } from '@angular/material/table';
                   </div>
                 </div>
                 <div class="prescription-actions">
-                  <button mat-raised-button color="primary" [disabled]="prescription.refillsLeft === 0">Refill Now</button>
-                  <button mat-button>Set Reminder</button>
-                  <button mat-button>Contact Pharmacy</button>
+                  <button mat-raised-button color="primary" [disabled]="prescription.refillsLeft === 0" (click)="refillPrescription(prescription)">Refill Now</button>
+                  <button mat-button (click)="setReminder(prescription)">Set Reminder</button>
+                  <button mat-button (click)="contactPharmacy(prescription)">Contact Pharmacy</button>
                 </div>
               </div>
             </div>
@@ -184,4 +184,16 @@ export class PrescriptionsComponent implements OnInit {
   ];
 
   ngOnInit() {}
+
+  refillPrescription(prescription: any) {
+    alert(`Refill request submitted for ${prescription.medication}. Your pharmacy will be contacted within 24 hours. Estimated pickup: ${prescription.nextRefill}`);
+  }
+
+  setReminder(prescription: any) {
+    alert(`Reminder set for ${prescription.medication}. You'll receive notifications for:\n• Daily medication time\n• Refill needed (3 days before)\n• Pharmacy pickup ready`);
+  }
+
+  contactPharmacy(prescription: any) {
+    alert(`Contacting MediQ Partner Pharmacy:\n\nCVS Pharmacy - Main Street\nPhone: (555) 123-4567\nAddress: 123 Main St, City\n\nRegarding: ${prescription.medication}\nPrescribed by: Dr. ${prescription.prescribedBy}`);
+  }
 }

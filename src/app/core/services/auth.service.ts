@@ -41,34 +41,34 @@ export class AuthService {
       'patient@mediq.com': { 
         role: 'patient', 
         name: 'John Patient',
-        phone: '+1-555-0123',
+        phone: '+1 (555) 123-4567',
         dateOfBirth: '1985-06-15',
         avatar: 'assets/avatars/patient.jpg'
       },
       'doctor@mediq.com': { 
         role: 'doctor', 
         name: 'Dr. Mambegwa',
-        phone: '+1-555-0456',
+        phone: '+1 (555) 234-5678',
         medicalLicense: 'MD-12345',
         specialization: 'Internal Medicine & Cardiology',
         avatar: 'assets/avatars/doctor.jpg'
       },
       'admin@mediq.com': { 
-        role: 'admin', 
+        role: 'Chief Technology & Innovation Officer', 
         name: 'N. Shimambani, MSc',
-        phone: '+1-555-0789',
+        phone: '+1 (555) 345-6789',
         avatar: 'assets/avatars/admin.jpg'
       }
     };
 
     const user = mockUsers[email as keyof typeof mockUsers];
-    if (user && password === 'demo123' && user.role === role) {
+    if (user && password === 'demo123' && (user.role === role || (role === 'admin' && user.role === 'Chief Technology & Innovation Officer'))) {
       const mockResponse: AuthResponse = {
         user: {
           id: role === 'patient' ? 'p001' : role === 'doctor' ? 'd001' : 'a001',
           email,
           name: user.name,
-          role: role,
+          role: role === 'admin' ? 'admin' : role,
           phone: user.phone,
           dateOfBirth: (user as any).dateOfBirth,
           medicalLicense: (user as any).medicalLicense,
