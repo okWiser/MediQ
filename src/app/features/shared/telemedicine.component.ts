@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-telemedicine',
@@ -13,14 +14,54 @@ import { MatChipsModule } from '@angular/material/chips';
     <div class="dashboard-container">
       <h1>Telemedicine</h1>
       
-      <div class="dashboard-grid">
+      <!-- Doctor View -->
+      <div *ngIf="userRole === 'doctor'" class="dashboard-grid">
+        <mat-card class="overview-card">
+          <mat-card-header>
+            <mat-card-title>Scheduled Video Consultations</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="appointment-list">
+              <div class="appointment-item" *ngFor="let appointment of doctorAppointments">
+                <div class="appointment-header">
+                  <div class="patient-info">
+                    <mat-icon>person</mat-icon>
+                    <div>
+                      <div class="patient-name">{{appointment.patient}}</div>
+                      <div class="reason">{{appointment.reason}}</div>
+                    </div>
+                  </div>
+                  <mat-chip [class]="'status-' + appointment.status">{{appointment.status}}</mat-chip>
+                </div>
+                <div class="appointment-details">
+                  <div class="detail-item">
+                    <mat-icon>schedule</mat-icon>
+                    <span>{{appointment.date}} at {{appointment.time}}</span>
+                  </div>
+                  <div class="detail-item">
+                    <mat-icon>timer</mat-icon>
+                    <span>{{appointment.duration}} minutes</span>
+                  </div>
+                </div>
+                <div class="appointment-actions">
+                  <button mat-raised-button color="primary" *ngIf="appointment.status === 'confirmed'">Start Call</button>
+                  <button mat-button>View Notes</button>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Patient View -->
+      <div *ngIf="userRole === 'patient'" class="dashboard-grid">
         <mat-card class="overview-card">
           <mat-card-header>
             <mat-card-title>Upcoming Virtual Appointments</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <div class="appointment-list">
-              <div class="appointment-item" *ngFor="let appointment of virtualAppointments">
+              <div class="appointment-item" *ngFor="let appointment of patientAppointments">
                 <div class="appointment-header">
                   <div class="doctor-info">
                     <mat-icon>video_call</mat-icon>
@@ -44,28 +85,8 @@ import { MatChipsModule } from '@angular/material/chips';
                 <div class="appointment-actions">
                   <button mat-raised-button color="primary" *ngIf="appointment.status === 'confirmed'">Join Call</button>
                   <button mat-button>Reschedule</button>
-                  <button mat-button>Cancel</button>
                 </div>
               </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="overview-card">
-          <mat-card-header>
-            <mat-card-title>Quick Consultation</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Need immediate medical advice? Connect with available doctors now.</p>
-            <div class="quick-consult-options">
-              <button mat-raised-button color="primary">
-                <mat-icon>video_call</mat-icon>
-                Video Consultation
-              </button>
-              <button mat-raised-button>
-                <mat-icon>chat</mat-icon>
-                Chat Consultation
-              </button>
             </div>
           </mat-card-content>
         </mat-card>
@@ -90,14 +111,18 @@ import { MatChipsModule } from '@angular/material/chips';
       align-items: center;
       margin-bottom: 12px;
     }
-    .doctor-info {
+    .doctor-info, .patient-info {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .doctor-name {
+    .doctor-name, .patient-name {
       font-weight: 600;
       color: var(--premium-text);
+    }
+    .reason {
+      font-size: 12px;
+      color: var(--premium-text-muted);
     }
     .specialty {
       font-size: 12px;
@@ -126,7 +151,28 @@ import { MatChipsModule } from '@angular/material/chips';
   `]
 })
 export class TelemedicineComponent implements OnInit {
-  virtualAppointments = [
+  userRole: string = '';
+  
+  doctorAppointments = [
+    {
+      patient: 'John Smith',
+      reason: 'Cardiology Follow-up',
+      date: 'Today',
+      time: '2:00 PM',
+      duration: 30,
+      status: 'confirmed'
+    },
+    {
+      patient: 'Sarah Johnson',
+      reason: 'Hypertension Check',
+      date: 'Today',
+      time: '3:30 PM',
+      duration: 20,
+      status: 'confirmed'
+    }
+  ];
+
+  patientAppointments = [
     {
       doctor: 'Mambegwa',
       specialty: 'Internal Medicine & Cardiology',
@@ -145,5 +191,10 @@ export class TelemedicineComponent implements OnInit {
     }
   ];
 
-  ngOnInit() {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    const user = this.authService.getCurrentUser();
+    this.userRole = user?.role || 'patient';
+  }
 }

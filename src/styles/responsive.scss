@@ -1,0 +1,227 @@
+// Responsive Design for All Screen Sizes
+
+// Mobile First Approach
+.dashboard-container,
+.analytics-container,
+.profile-container {
+  padding: 1rem !important;
+  
+  @media (min-width: 768px) {
+    padding: 1.5rem !important;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 2rem !important;
+  }
+}
+
+// Grid Layouts
+.dashboard-grid,
+.metrics-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
+  
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    gap: 2rem !important;
+  }
+}
+
+// Cards
+.mat-mdc-card, .mat-card {
+  margin: 0.5rem 0 !important;
+  
+  @media (max-width: 640px) {
+    border-radius: 12px !important;
+    margin: 0.25rem 0 !important;
+  }
+}
+
+// Navigation
+.mat-toolbar {
+  .mat-toolbar-row {
+    padding: 0 8px !important;
+    
+    @media (min-width: 768px) {
+      padding: 0 16px !important;
+    }
+  }
+  
+  span:first-child {
+    font-size: 1rem !important;
+    
+    @media (min-width: 768px) {
+      font-size: 1.25rem !important;
+    }
+  }
+}
+
+// Tables
+.mat-mdc-table {
+  @media (max-width: 768px) {
+    font-size: 0.875rem !important;
+    
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
+      padding: 8px 4px !important;
+    }
+  }
+}
+
+// Forms
+.mat-mdc-form-field {
+  width: 100% !important;
+  
+  @media (max-width: 640px) {
+    .mat-mdc-form-field-outline {
+      border-radius: 8px !important;
+    }
+  }
+}
+
+// Buttons
+.mat-mdc-raised-button {
+  @media (max-width: 640px) {
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+// Menus
+.mat-mdc-menu-panel {
+  @media (max-width: 640px) {
+    max-width: calc(100vw - 32px) !important;
+    border-radius: 12px !important;
+  }
+}
+
+// Profile Menu
+.profile-menu {
+  @media (max-width: 640px) {
+    .profile-header {
+      padding: 12px !important;
+      
+      .profile-info {
+        .profile-name {
+          font-size: 1rem !important;
+        }
+        
+        .profile-email {
+          font-size: 0.75rem !important;
+        }
+      }
+    }
+  }
+}
+
+// Notification Menu
+.notification-menu {
+  @media (max-width: 640px) {
+    max-width: calc(100vw - 32px) !important;
+    
+    .notification-item {
+      padding: 12px !important;
+      
+      .notification-content {
+        .notification-title {
+          font-size: 0.875rem !important;
+        }
+        
+        .notification-message {
+          font-size: 0.75rem !important;
+        }
+      }
+    }
+  }
+}
+
+// Navigation Menu
+.navigation-menu {
+  @media (max-width: 640px) {
+    max-width: calc(100vw - 32px) !important;
+    
+    .menu-item {
+      padding: 12px 16px !important;
+      
+      span {
+        font-size: 0.875rem !important;
+      }
+    }
+  }
+}
+
+// Welcome Section
+.welcome-section {
+  @media (max-width: 640px) {
+    padding: 1rem !important;
+    border-radius: 12px !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+// Metric Values
+.metric-value, .stat-value {
+  @media (max-width: 640px) {
+    font-size: 1.25rem !important;
+  }
+}
+
+// Appointment Items
+.appointment-item {
+  @media (max-width: 640px) {
+    padding: 12px !important;
+    border-radius: 8px !important;
+    
+    .appointment-header {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 8px !important;
+    }
+    
+    .appointment-details {
+      flex-direction: column !important;
+      gap: 8px !important;
+    }
+    
+    .appointment-actions {
+      flex-wrap: wrap !important;
+      gap: 8px !important;
+    }
+  }
+}
+
+// Status Chips
+.status-confirmed,
+.status-active,
+.status-completed,
+.status-pending,
+.status-scheduled {
+  @media (max-width: 640px) {
+    padding: 2px 8px !important;
+    font-size: 0.625rem !important;
+  }
+}
+
+// Hide text on very small screens
+@media (max-width: 480px) {
+  .mat-toolbar {
+    .mat-icon-button + .mat-icon-button {
+      margin-left: 4px !important;
+    }
+  }
+  
+  .menu-item span {
+    display: none !important;
+  }
+  
+  .menu-item {
+    justify-content: center !important;
+    padding: 12px !important;
+  }
+}

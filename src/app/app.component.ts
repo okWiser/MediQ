@@ -57,8 +57,25 @@ export class AppComponent implements OnInit {
     });
   }
 
-  goBack() {
-    this.location.back();
+  goToHome() {
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      switch (user.role) {
+        case 'patient':
+          this.router.navigate(['/patient-dashboard']);
+          break;
+        case 'doctor':
+          this.router.navigate(['/doctor-dashboard']);
+          break;
+        case 'admin':
+          this.router.navigate(['/admin-dashboard']);
+          break;
+        default:
+          this.router.navigate(['/']);
+      }
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   markAsRead(id: string) {

@@ -3,10 +3,10 @@
     <span>MediQ Health Excellence</span>
     <span class="spacer"></span>
     <ng-container *ngIf="isAuthenticated$ | async; else loginButton">
-      <button mat-icon-button (click)="goBack()" *ngIf="canGoBack" 
-              aria-label="Go back to previous page" 
-              matTooltip="Go back">
-        <mat-icon>arrow_back</mat-icon>
+      <button mat-icon-button (click)="goToHome()" 
+              aria-label="Go to home dashboard" 
+              matTooltip="Home Dashboard">
+        <mat-icon>home</mat-icon>
       </button>
       <button mat-icon-button [matMenuTriggerFor]="navigationMenu" 
               aria-label="Open navigation menu"
