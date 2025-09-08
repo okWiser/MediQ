@@ -8,6 +8,7 @@ import { selectIsAuthenticated, selectUserRole } from './core/store/auth/auth.se
 import { AuthActions } from './core/store/auth/auth.actions';
 import { ThemeService } from './core/services/theme.service';
 import { NotificationService, Notification } from './core/services/notification.service';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
     private themeService: ThemeService,
     private location: Location,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) {
     this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
     this.userRole$ = this.store.select(selectUserRole);
@@ -74,13 +76,13 @@ export class AppComponent implements OnInit {
   }
 
   getCurrentUserName(): string {
-    const user = this.notificationService.getCurrentUser?.() || { name: 'User' };
-    return user.name || 'User';
+    const user = this.authService.getCurrentUser();
+    return user?.name || 'User';
   }
 
   getCurrentUserRole(): string {
-    const user = this.notificationService.getCurrentUser?.() || { role: 'user' };
-    return user.role || 'user';
+    const user = this.authService.getCurrentUser();
+    return user?.role || 'user';
   }
 
   viewProfile() {
