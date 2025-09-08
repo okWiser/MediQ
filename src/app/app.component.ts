@@ -35,6 +35,13 @@ export class AppComponent implements OnInit {
     this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
     this.userRole$ = this.store.select(selectUserRole);
     this.isDarkTheme$ = this.themeService.isDarkTheme$;
+    
+    // Restore authentication state on app initialization
+    const token = this.authService.getToken();
+    const user = this.authService.getCurrentUser();
+    if (token && user) {
+      this.store.dispatch(AuthActions.loginSuccess({ user, token }));
+    }
   }
 
   ngOnInit() {
