@@ -35,13 +35,13 @@
       </button>
       <mat-menu #notificationMenu="matMenu" class="notification-menu">
         <div class="notification-header">Notifications</div>
-        <mat-menu-item *ngFor="let notification of notifications" (click)="markAsRead(notification.id)">
+        <div class="notification-item" *ngFor="let notification of notifications" (click)="markAsRead(notification.id)">
           <mat-icon [color]="notification.type === 'warning' ? 'warn' : 'primary'">{{getNotificationIcon(notification.type)}}</mat-icon>
           <div class="notification-content">
             <div class="notification-title">{{notification.title}}</div>
             <div class="notification-message">{{notification.message}}</div>
           </div>
-        </mat-menu-item>
+        </div>
       </mat-menu>
       <button mat-icon-button (click)="toggleTheme()">
         <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
