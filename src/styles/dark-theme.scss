@@ -1,29 +1,29 @@
 // Dark theme overrides
 .dark-theme {
-  background-color: #121212 !important;
-  color: #e0e0e0 !important;
+  background-color: #0d1117 !important;
+  color: #f0f6fc !important;
   
   // Card backgrounds
   .mat-mdc-card {
-    background-color: #1e1e1e !important;
-    color: #e0e0e0 !important;
-    border: 1px solid #333 !important;
+    background-color: #161b22 !important;
+    color: #f0f6fc !important;
+    border: 1px solid #30363d !important;
   }
   
   // Table styles
   .mat-mdc-table {
-    background-color: #1e1e1e !important;
-    color: #e0e0e0 !important;
+    background-color: #161b22 !important;
+    color: #f0f6fc !important;
   }
   
   .mat-mdc-header-cell {
-    color: #ffffff !important;
-    background-color: #2d2d2d !important;
+    color: #f0f6fc !important;
+    background-color: #21262d !important;
   }
   
   .mat-mdc-cell {
-    color: #e0e0e0 !important;
-    border-bottom-color: #333 !important;
+    color: #f0f6fc !important;
+    border-bottom-color: #30363d !important;
   }
   
   // Form field styles
@@ -84,41 +84,59 @@
   
   // Better button visibility
   .mat-mdc-button, .mat-mdc-raised-button {
-    color: #e0e0e0 !important;
+    color: #f0f6fc !important;
   }
   
   // Form field improvements
   .mat-mdc-form-field {
     .mat-mdc-form-field-outline {
-      color: #666 !important;
+      color: #30363d !important;
     }
     
     .mat-mdc-form-field-label {
-      color: #b0b0b0 !important;
+      color: #f0f6fc !important;
     }
     
     .mat-mdc-input-element {
-      color: #e0e0e0 !important;
+      color: #f0f6fc !important;
     }
   }
   
   // Menu improvements
   .mat-mdc-menu-panel {
-    background-color: #1e1e1e !important;
-    color: #e0e0e0 !important;
+    background-color: #161b22 !important;
+    color: #f0f6fc !important;
   }
   
   // Tab improvements
   .mat-mdc-tab-group {
-    background-color: #1e1e1e !important;
+    background-color: #161b22 !important;
   }
   
   .mat-mdc-tab {
-    color: #b0b0b0 !important;
+    color: #8b949e !important;
   }
   
   .mat-mdc-tab.mdc-tab--active {
-    color: #ffffff !important;
+    color: #f0f6fc !important;
+  }
+  
+  // Additional visibility fixes
+  .mat-mdc-card-title,
+  .mat-mdc-card-subtitle,
+  .mat-mdc-card-content {
+    color: #f0f6fc !important;
+  }
+  
+  .notification-header,
+  .notification-title,
+  .notification-message {
+    color: #f0f6fc !important;
+  }
+  
+  .profile-name,
+  .profile-role {
+    color: #f0f6fc !important;
   }
   
   // Tab content
@@ -139,16 +157,16 @@
   
   // General text elements
   h1, h2, h3, h4, h5, h6 {
-    color: #ffffff !important;
+    color: #f0f6fc !important;
   }
   
   p, span, div {
-    color: #e0e0e0 !important;
+    color: #f0f6fc !important;
   }
   
   // Main content background
   .main-content {
-    background-color: #121212 !important;
+    background-color: #0d1117 !important;
   }
   
   // Dashboard containers
@@ -158,9 +176,10 @@
   .ai-insights-container,
   .prescriptions-container,
   .voice-notes-container,
-  .settings-container {
-    background-color: #121212 !important;
-    color: #e0e0e0 !important;
+  .settings-container,
+  .profile-container {
+    background-color: #0d1117 !important;
+    color: #f0f6fc !important;
   }
   
   // Welcome sections

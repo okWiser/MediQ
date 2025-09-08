@@ -48,6 +48,13 @@ export class AppComponent implements OnInit {
       this.notifications = notifications;
       this.unreadCount = notifications.filter(n => !n.read).length;
     });
+    
+    // Update notifications when user role changes
+    this.userRole$.subscribe(role => {
+      if (role) {
+        this.notificationService.updateNotificationsForRole(role);
+      }
+    });
   }
 
   goBack() {

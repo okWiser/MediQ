@@ -15,28 +15,104 @@ export interface Notification {
   providedIn: 'root'
 })
 export class NotificationService {
-  private notifications = new BehaviorSubject<Notification[]>([
-    {
-      id: '1',
-      type: 'warning',
-      title: 'Appointment Reminder',
-      message: 'You have an appointment with Dr. Smith tomorrow at 10:00 AM',
-      timestamp: new Date(),
-      read: false
-    },
-    {
-      id: '2',
-      type: 'info',
-      title: 'Lab Results Available',
-      message: 'Your blood work results are now available',
-      timestamp: new Date(Date.now() - 3600000),
-      read: false
-    }
-  ]);
+  private notifications = new BehaviorSubject<Notification[]>([]);
   
   public notifications$ = this.notifications.asObservable();
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar) {
+    this.initializeNotifications();
+  }
+
+  private initializeNotifications() {
+    // This will be updated when user logs in
+    this.updateNotificationsForRole('patient');
+  }
+
+  updateNotificationsForRole(role: string) {
+    const roleNotifications = {
+      'patient': [
+        {
+          id: '1',
+          type: 'warning' as const,
+          title: 'Appointment Reminder',
+          message: 'You have an appointment with Dr. Smith tomorrow at 10:00 AM',
+          timestamp: new Date(),
+          read: false
+        },
+        {
+          id: '2',
+          type: 'info' as const,
+          title: 'Lab Results Available',
+          message: 'Your blood work results from January 10th are now available',
+          timestamp: new Date(Date.now() - 3600000),
+          read: false
+        },
+        {
+          id: '3',
+          type: 'success' as const,
+          title: 'Prescription Refilled',
+          message: 'Your Lisinopril prescription has been successfully refilled',
+          timestamp: new Date(Date.now() - 7200000),
+          read: true
+        }
+      ],
+      'doctor': [
+        {
+          id: '1',
+          type: 'warning' as const,
+          title: 'High Priority Patient',
+          message: 'David Chen requires immediate attention - cardiac follow-up',
+          timestamp: new Date(),
+          read: false
+        },
+        {
+          id: '2',
+          type: 'info' as const,
+          title: 'Schedule Update',
+          message: 'Your 3:00 PM appointment has been rescheduled to 3:30 PM',
+          timestamp: new Date(Date.now() - 1800000),
+          read: false
+        },
+        {
+          id: '3',
+          type: 'success' as const,
+          title: 'Lab Results Reviewed',
+          message: 'All pending lab results have been reviewed and signed',
+          timestamp: new Date(Date.now() - 5400000),
+          read: true
+        }
+      ],
+      'admin': [
+        {
+          id: '1',
+          type: 'error' as const,
+          title: 'System Alert',
+          message: 'Database backup completed with warnings - review required',
+          timestamp: new Date(),
+          read: false
+        },
+        {
+          id: '2',
+          type: 'warning' as const,
+          title: 'License Expiration',
+          message: 'Dr. Rodriguez medical license expires in 30 days',
+          timestamp: new Date(Date.now() - 3600000),
+          read: false
+        },
+        {
+          id: '3',
+          type: 'info' as const,
+          title: 'Monthly Report',
+          message: 'January performance report is ready for review',
+          timestamp: new Date(Date.now() - 7200000),
+          read: true
+        }
+      ]
+    };
+
+    const notifications = roleNotifications[role as keyof typeof roleNotifications] || roleNotifications['patient'];
+    this.notifications.next(notifications);
+  }
 
   showSuccess(message: string) {
     this.snackBar.open(message, 'Close', {
