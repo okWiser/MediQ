@@ -125,7 +125,7 @@ export class ProfileComponent implements OnInit {
     
     const profileData = {
       'patient': {
-        name: 'John Patient',
+        name: 'Mathew Boobies',
         email: 'patient@mediq.com',
         phone: '+1 (555) 123-4567',
         department: 'Patient Services',

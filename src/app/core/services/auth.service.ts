@@ -40,7 +40,7 @@ export class AuthService {
     const mockUsers = {
       'patient@mediq.com': { 
         role: 'patient', 
-        name: 'John Patient',
+        name: 'Mathew Boobies',
         phone: '+1 (555) 123-4567',
         dateOfBirth: '1985-06-15',
         avatar: 'assets/avatars/patient.jpg'

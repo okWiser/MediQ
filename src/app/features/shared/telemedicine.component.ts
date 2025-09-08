@@ -155,7 +155,7 @@ export class TelemedicineComponent implements OnInit {
   
   doctorAppointments = [
     {
-      patient: 'John Smith',
+      patient: 'Mathew Boobies',
       reason: 'Cardiology Follow-up',
       date: 'Today',
       time: '2:00 PM',
@@ -163,7 +163,7 @@ export class TelemedicineComponent implements OnInit {
       status: 'confirmed'
     },
     {
-      patient: 'Sarah Johnson',
+      patient: 'Mathew Boobies',
       reason: 'Hypertension Check',
       date: 'Today',
       time: '3:30 PM',
