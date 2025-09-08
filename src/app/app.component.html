@@ -43,10 +43,38 @@
           </div>
         </div>
       </mat-menu>
-      <button mat-icon-button (click)="toggleTheme()">
-        <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-button">
+        <mat-icon>account_circle</mat-icon>
       </button>
-      <button mat-button (click)="logout()">Logout</button>
+      <mat-menu #profileMenu="matMenu" class="profile-menu">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          <div class="profile-info">
+            <div class="profile-name">{{getCurrentUserName()}}</div>
+            <div class="profile-role">{{getCurrentUserRole() | titlecase}}</div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="profile-item" (click)="viewProfile()">
+          <mat-icon>person</mat-icon>
+          <span>My Profile</span>
+        </div>
+        <div class="profile-item" (click)="openSettings()">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </div>
+        <div class="profile-item" (click)="toggleTheme()">
+          <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+          <span>{{(isDarkTheme$ | async) ? 'Light Mode' : 'Dark Mode'}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="profile-item logout" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Sign Out</span>
+        </div>
+      </mat-menu>
     </ng-container>
     <ng-template #loginButton>
       <button mat-icon-button (click)="toggleTheme()">

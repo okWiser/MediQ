@@ -72,4 +72,22 @@ export class AppComponent implements OnInit {
   toggleTheme() {
     this.themeService.toggleTheme();
   }
+
+  getCurrentUserName(): string {
+    const user = this.notificationService.getCurrentUser?.() || { name: 'User' };
+    return user.name || 'User';
+  }
+
+  getCurrentUserRole(): string {
+    const user = this.notificationService.getCurrentUser?.() || { role: 'user' };
+    return user.role || 'user';
+  }
+
+  viewProfile() {
+    this.router.navigate(['/profile']);
+  }
+
+  openSettings() {
+    this.router.navigate(['/settings']);
+  }
 }
