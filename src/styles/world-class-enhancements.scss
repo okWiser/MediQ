@@ -1,0 +1,213 @@
+// World-Class UI Enhancements
+.notification-menu {
+  .notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--premium-border);
+    background: linear-gradient(90deg, var(--premium-card) 0%, #1e293b 100%);
+  }
+  
+  .no-notifications {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+    color: var(--premium-text-muted);
+    
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+      opacity: 0.5;
+    }
+  }
+  
+  .notification-item {
+    position: relative;
+    padding: 16px;
+    border-bottom: 1px solid var(--premium-border);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: var(--premium-card-hover);
+    }
+    
+    &.unread {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+      border-left: 3px solid var(--premium-accent);
+    }
+    
+    .notification-time {
+      font-size: 11px;
+      color: var(--premium-text-muted);
+      margin-top: 4px;
+    }
+    
+    .notification-status {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 8px;
+      height: 8px;
+      background: var(--premium-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+    }
+  }
+}
+
+.profile-menu {
+  .profile-header {
+    background: linear-gradient(135deg, var(--premium-card) 0%, #1e293b 100%);
+    padding: 24px 16px;
+    
+    .profile-info {
+      .profile-email {
+        font-size: 12px;
+        color: var(--premium-text-muted);
+        margin-top: 4px;
+      }
+      
+      .profile-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+        font-size: 11px;
+        
+        .status-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          
+          &.online {
+            background: #10b981;
+            box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+          }
+        }
+      }
+    }
+  }
+  
+  .profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: var(--premium-card-hover);
+      padding-left: 20px;
+    }
+    
+    .chevron {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      opacity: 0.5;
+      transition: all 0.2s ease;
+    }
+    
+    &:hover .chevron {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+    
+    .theme-toggle {
+      margin-left: auto;
+    }
+  }
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  
+  .online-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border: 2px solid var(--premium-card);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+  }
+}
+
+// Enhanced Tooltips
+.mat-mdc-tooltip {
+  background: var(--premium-card) !important;
+  color: var(--premium-text) !important;
+  border: 1px solid var(--premium-border) !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  box-shadow: var(--premium-shadow) !important;
+}
+
+// Keyboard Focus Indicators
+button:focus-visible,
+.profile-item:focus-visible,
+.notification-item:focus-visible {
+  outline: 2px solid var(--premium-accent) !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
+// Loading States
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// Responsive Enhancements
+@media (max-width: 768px) {
+  .mat-toolbar {
+    .mat-toolbar-row {
+      padding: 0 8px;
+    }
+    
+    .mat-button {
+      min-width: auto;
+      padding: 0 8px;
+      font-size: 12px;
+    }
+  }
+  
+  .notification-menu,
+  .profile-menu {
+    max-width: calc(100vw - 32px);
+  }
+}
+
+// High Contrast Mode Support
+@media (prefers-contrast: high) {
+  :root {
+    --premium-text: #ffffff;
+    --premium-card: #000000;
+    --premium-border: #ffffff;
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

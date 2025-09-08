@@ -23,6 +23,13 @@ export class ThemeService {
   }
 
   private applyTheme(isDark: boolean): void {
-    document.body.classList.toggle('dark-theme', isDark);
+    const body = document.body;
+    if (isDark) {
+      body.classList.add('dark-theme');
+      body.classList.remove('light-theme');
+    } else {
+      body.classList.remove('dark-theme');
+      body.classList.add('light-theme');
+    }
   }
 }

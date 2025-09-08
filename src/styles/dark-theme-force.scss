@@ -30,9 +30,10 @@
   .overview-card,
   .analysis-card,
   .recommendation-card,
-  .interaction-card {
+  .interaction-card,
+  .demo-info {
     background-color: #1e1e1e !important;
-    color: #ffffff !important;
+    color: #f8fafc !important;
   }
   
   // Force all text to be white on dark backgrounds

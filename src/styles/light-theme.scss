@@ -1,0 +1,52 @@
+// Light theme overrides
+.light-theme, body:not(.dark-theme) {
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+  
+  // Light theme cards
+  .mat-mdc-card, .mat-card {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+  
+  // Light theme text
+  h1, h2, h3, h4, h5, h6,
+  p, span, div {
+    color: #1e293b !important;
+  }
+  
+  // Light theme containers
+  .main-content,
+  .dashboard-container,
+  .analytics-container,
+  .profile-container {
+    background-color: #f8fafc !important;
+    color: #1e293b !important;
+  }
+  
+  // Light theme tables
+  .mat-mdc-table {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+  }
+  
+  .mat-mdc-header-cell,
+  .mat-mdc-cell {
+    color: #1e293b !important;
+  }
+  
+  // Light theme form fields
+  .mat-mdc-form-field {
+    .mat-mdc-form-field-label,
+    .mat-mdc-input-element {
+      color: #1e293b !important;
+    }
+  }
+  
+  // Light theme menus
+  .mat-mdc-menu-panel {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+  }
+}
