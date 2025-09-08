@@ -1,7 +1,23 @@
-// Dark theme overrides
+// Dark theme overrides - Aggressive text visibility fix
 .dark-theme {
-  background-color: #0d1117 !important;
+  // Force all text to be light colored
   color: #f0f6fc !important;
+  
+  // Universal text override
+  *, *::before, *::after {
+    color: #f0f6fc !important;
+  }
+  
+  // Specific overrides for common dark text
+  .mat-typography,
+  .mat-body,
+  .mat-body-1,
+  .mat-body-2,
+  .mat-caption,
+  .mat-small {
+    color: #f0f6fc !important;
+  }
+  background-color: #0d1117 !important;
   
   // Card backgrounds
   .mat-mdc-card {

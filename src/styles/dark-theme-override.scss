@@ -1,0 +1,52 @@
+// Aggressive dark theme text visibility override
+body.dark-theme {
+  // Force all elements to have light text
+  * {
+    color: #f0f6fc !important;
+  }
+  
+  // Override Material Design typography
+  .mat-typography * {
+    color: #f0f6fc !important;
+  }
+  
+  // Override all possible text elements
+  p, span, div, h1, h2, h3, h4, h5, h6, 
+  label, input, textarea, select, option,
+  .mat-body, .mat-body-1, .mat-body-2,
+  .mat-caption, .mat-small, .mat-subheading-1, .mat-subheading-2 {
+    color: #f0f6fc !important;
+  }
+  
+  // Card specific overrides
+  .mat-card, .mat-card * {
+    color: #f0f6fc !important;
+  }
+  
+  // Login form specific
+  .login-container *,
+  .credentials-info *,
+  .demo-credentials * {
+    color: #f0f6fc !important;
+  }
+  
+  // Dashboard specific
+  .dashboard-container *,
+  .welcome-section *,
+  .dashboard-grid *,
+  .dashboard-card * {
+    color: #f0f6fc !important;
+  }
+  
+  // Override any inherited dark colors
+  [style*="color: #"] {
+    color: #f0f6fc !important;
+  }
+  
+  // Override computed styles
+  .mat-mdc-card-content,
+  .mat-mdc-card-title,
+  .mat-mdc-card-subtitle {
+    color: #f0f6fc !important;
+  }
+}
