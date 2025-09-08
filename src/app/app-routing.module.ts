@@ -1,123 +1,108 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SymptomCheckerComponent } from './features/ai/symptom-checker/symptom-checker.component';
-import { VoiceNotesComponent } from './features/voice-notes/voice-notes.component';
-import { SmartSchedulingComponent } from './features/smart-scheduling/smart-scheduling.component';
-import { LoginComponent } from './features/auth/login/login.component';
-import { PatientDashboardComponent } from './features/patient-portal/patient-dashboard.component';
-import { DoctorDashboardComponent } from './features/doctor-portal/doctor-dashboard.component';
-import { AdminDashboardComponent } from './features/admin-portal/admin-dashboard.component';
-import { AppointmentsComponent } from './features/patient-portal/appointments.component';
-import { MedicalRecordsComponent } from './features/patient-portal/medical-records.component';
-import { PatientManagementComponent } from './features/doctor-portal/patient-management.component';
-import { UserManagementComponent } from './features/admin-portal/user-management.component';
-import { HospitalManagementComponent } from './features/admin-portal/hospital-management.component';
-import { AnalyticsComponent } from './features/admin-portal/analytics.component';
-import { SystemSettingsComponent } from './features/admin-portal/system-settings.component';
-import { DoctorScheduleComponent } from './features/doctor-portal/doctor-schedule.component';
-import { PrescriptionsComponent } from './features/doctor-portal/prescriptions.component';
-import { AiInsightsComponent } from './features/doctor-portal/ai-insights.component';
-import { ProfileComponent } from './features/profile/profile.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { 
+    path: 'login', 
+    loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
+  },
   { 
     path: 'patient-dashboard', 
-    component: PatientDashboardComponent,
+    loadComponent: () => import('./features/patient-portal/patient-dashboard.component').then(m => m.PatientDashboardComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'patient' }
   },
   { 
     path: 'doctor-dashboard', 
-    component: DoctorDashboardComponent,
+    loadComponent: () => import('./features/doctor-portal/doctor-dashboard.component').then(m => m.DoctorDashboardComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'doctor' }
   },
   { 
     path: 'admin-dashboard', 
-    component: AdminDashboardComponent,
+    loadComponent: () => import('./features/admin-portal/admin-dashboard.component').then(m => m.AdminDashboardComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'admin' }
   },
   { 
     path: 'symptom-checker', 
-    component: SymptomCheckerComponent,
+    loadComponent: () => import('./features/ai/symptom-checker/symptom-checker.component').then(m => m.SymptomCheckerComponent),
     canActivate: [AuthGuard]
   },
   { 
     path: 'voice-notes', 
-    component: VoiceNotesComponent,
+    loadComponent: () => import('./features/voice-notes/voice-notes.component').then(m => m.VoiceNotesComponent),
     canActivate: [AuthGuard]
   },
   { 
     path: 'smart-scheduling', 
-    component: SmartSchedulingComponent,
+    loadComponent: () => import('./features/smart-scheduling/smart-scheduling.component').then(m => m.SmartSchedulingComponent),
     canActivate: [AuthGuard]
   },
   { 
     path: 'appointments', 
-    component: AppointmentsComponent,
+    loadComponent: () => import('./features/patient-portal/appointments.component').then(m => m.AppointmentsComponent),
     canActivate: [AuthGuard]
   },
   { 
     path: 'medical-records', 
-    component: MedicalRecordsComponent,
+    loadComponent: () => import('./features/patient-portal/medical-records.component').then(m => m.MedicalRecordsComponent),
     canActivate: [AuthGuard]
   },
   { 
     path: 'patients', 
-    component: PatientManagementComponent,
+    loadComponent: () => import('./features/doctor-portal/patient-management.component').then(m => m.PatientManagementComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'doctor' }
   },
   { 
     path: 'doctor-schedule', 
-    component: DoctorScheduleComponent,
+    loadComponent: () => import('./features/doctor-portal/doctor-schedule.component').then(m => m.DoctorScheduleComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'doctor' }
   },
   { 
     path: 'prescriptions', 
-    component: PrescriptionsComponent,
+    loadComponent: () => import('./features/doctor-portal/prescriptions.component').then(m => m.PrescriptionsComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'doctor' }
   },
   { 
     path: 'ai-insights', 
-    component: AiInsightsComponent,
+    loadComponent: () => import('./features/doctor-portal/ai-insights.component').then(m => m.AiInsightsComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'doctor' }
   },
   { 
     path: 'user-management', 
-    component: UserManagementComponent,
+    loadComponent: () => import('./features/admin-portal/user-management.component').then(m => m.UserManagementComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'admin' }
   },
   { 
     path: 'hospital-management', 
-    component: HospitalManagementComponent,
+    loadComponent: () => import('./features/admin-portal/hospital-management.component').then(m => m.HospitalManagementComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'admin' }
   },
   { 
     path: 'analytics', 
-    component: AnalyticsComponent,
+    loadComponent: () => import('./features/admin-portal/analytics.component').then(m => m.AnalyticsComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'admin' }
   },
   { 
     path: 'system-settings', 
-    component: SystemSettingsComponent,
+    loadComponent: () => import('./features/admin-portal/system-settings.component').then(m => m.SystemSettingsComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'admin' }
   },
   { 
     path: 'profile', 
-    component: ProfileComponent,
+    loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '/login' }
