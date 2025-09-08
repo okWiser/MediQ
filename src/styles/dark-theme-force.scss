@@ -1,0 +1,46 @@
+// Force all text to be visible in dark theme
+.dark-theme {
+  // Nuclear option - force everything to be light colored
+  * {
+    color: #ffffff !important;
+  }
+  
+  // Override any possible dark text
+  *[style*="color"] {
+    color: #ffffff !important;
+  }
+  
+  // Force all Material components
+  .mat-mdc-card,
+  .mat-mdc-card *,
+  .mat-card,
+  .mat-card *,
+  .mat-typography,
+  .mat-typography * {
+    color: #ffffff !important;
+  }
+  
+  // Force all text elements
+  p, span, div, h1, h2, h3, h4, h5, h6,
+  label, input, textarea, select, option,
+  .mat-body, .mat-body-1, .mat-body-2,
+  .mat-caption, .mat-small {
+    color: #ffffff !important;
+  }
+  
+  // Override computed styles
+  .mat-mdc-card-content,
+  .mat-mdc-card-title,
+  .mat-mdc-card-subtitle,
+  .mat-mdc-card-header {
+    color: #ffffff !important;
+  }
+  
+  // Force all containers
+  .dashboard-container *,
+  .analytics-container *,
+  .profile-container *,
+  .login-container * {
+    color: #ffffff !important;
+  }
+}
