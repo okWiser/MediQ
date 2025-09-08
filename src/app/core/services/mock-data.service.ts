@@ -73,7 +73,7 @@ export class MockDataService {
     return [
       { id: 'p001', name: 'John Patient', email: 'patient@mediq.com', role: 'patient', status: 'Active', lastLogin: '2024-01-14', department: 'N/A' },
       { id: 'd001', name: 'Dr. Sarah Smith', email: 'doctor@mediq.com', role: 'doctor', status: 'Active', lastLogin: '2024-01-14', department: 'Internal Medicine' },
-      { id: 'a001', name: 'Admin User', email: 'admin@mediq.com', role: 'admin', status: 'Active', lastLogin: '2024-01-14', department: 'Administration' },
+      { id: 'a001', name: 'N. Shimambani, MSc', email: 'n.shimambani@mediq.com', role: 'admin', status: 'Active', lastLogin: '2024-01-14', department: 'Technology & Innovation' },
       { id: 'p002', name: 'Jane Smith', email: 'jane.smith@email.com', role: 'patient', status: 'Active', lastLogin: '2024-01-13', department: 'N/A' },
       { id: 'd002', name: 'Dr. Michael Johnson', email: 'mjohnson@mediq.com', role: 'doctor', status: 'Active', lastLogin: '2024-01-14', department: 'Cardiology' },
       { id: 'd003', name: 'Dr. Emily Davis', email: 'edavis@mediq.com', role: 'doctor', status: 'Active', lastLogin: '2024-01-13', department: 'Pediatrics' },

@@ -55,7 +55,7 @@ export class AuthService {
       },
       'admin@mediq.com': { 
         role: 'admin', 
-        name: 'Admin User',
+        name: 'N. Shimambani, MSc',
         phone: '+1-555-0789',
         avatar: 'assets/avatars/admin.jpg'
       }

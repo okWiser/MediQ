@@ -141,11 +141,11 @@ export class ProfileComponent implements OnInit {
         stats: { experience: '12', patients: '1,247', rating: '4.9/5' }
       },
       'admin': {
-        name: 'Admin User',
-        email: 'admin@mediq.com',
+        name: 'N. Shimambani, MSc',
+        email: 'n.shimambani@mediq.com',
         phone: '+1 (555) 345-6789',
-        department: 'System Administration',
-        role: 'admin',
+        department: 'Technology & Innovation',
+        role: 'Chief Technology & Innovation Officer',
         stats: { experience: '8', patients: 'N/A', rating: 'N/A' }
       }
     };
