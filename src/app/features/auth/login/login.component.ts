@@ -178,8 +178,21 @@ export class LoginComponent {
     this.isLoading = true;
     const { email, password, role } = this.loginForm.value;
     
+    // Add timeout to prevent infinite loading
+    const loginTimeout = setTimeout(() => {
+      if (this.isLoading) {
+        this.isLoading = false;
+        this.errorMessage = 'Login timeout. Please try again.';
+        this.snackBar.open('Login timeout. Please check your connection.', 'Close', {
+          duration: 5000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    }, 10000);
+    
     this.authService.login(email, password, role).subscribe({
       next: (response) => {
+        clearTimeout(loginTimeout);
         this.store.dispatch(AuthActions.loginSuccess({ 
           user: response.user, 
           token: response.token 
@@ -195,12 +208,25 @@ export class LoginComponent {
         this.isLoading = false;
       },
       error: (error) => {
-        this.errorMessage = 'Invalid credentials. Please check your email, password, and role.';
-        this.snackBar.open('Login failed. Please try again.', 'Close', {
+        clearTimeout(loginTimeout);
+        this.isLoading = false;
+        
+        // Enhanced error handling
+        if (error.message.includes('Invalid credentials')) {
+          this.errorMessage = 'Invalid email or password. Please check your credentials.';
+        } else if (error.message.includes('role')) {
+          this.errorMessage = 'Incorrect role selected. Please verify your role and try again.';
+        } else {
+          this.errorMessage = 'Login failed. Please check your credentials and selected role.';
+        }
+        
+        this.snackBar.open(this.errorMessage, 'Close', {
           duration: 5000,
           panelClass: ['error-snackbar']
         });
-        this.isLoading = false;
+        
+        // Reset form on error
+        this.loginForm.get('password')?.setValue('');
       }
     });
   }

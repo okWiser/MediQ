@@ -138,4 +138,9 @@ export class NotificationService {
     );
     this.notifications.next(notifications);
   }
+
+  markAllAsRead() {
+    const notifications = this.notifications.value.map(n => ({ ...n, read: true }));
+    this.notifications.next(notifications);
+  }
 }
