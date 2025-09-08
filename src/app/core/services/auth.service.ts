@@ -51,6 +51,7 @@ export class AuthService {
         phone: '+1 (555) 234-5678',
         medicalLicense: 'MD-12345',
         specialization: 'Internal Medicine & Cardiology',
+        experience: '06',
         avatar: 'assets/avatars/doctor.jpg'
       },
       'admin@mediq.com': { 

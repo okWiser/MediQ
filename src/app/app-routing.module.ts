@@ -160,6 +160,16 @@ const routes: Routes = [
     loadComponent: () => import('./features/doctor-portal/clinical-notes.component').then(m => m.ClinicalNotesComponent),
     canActivate: [AuthGuard]
   },
+  { 
+    path: 'security', 
+    loadComponent: () => import('./features/shared/security.component').then(m => m.SecurityComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'settings', 
+    loadComponent: () => import('./features/shared/settings.component').then(m => m.SettingsComponent),
+    canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: '/login' }
 ];
 
