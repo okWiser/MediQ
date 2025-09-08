@@ -47,10 +47,10 @@ export class AuthService {
       },
       'doctor@mediq.com': { 
         role: 'doctor', 
-        name: 'Dr. Sarah Smith',
+        name: 'Dr. Mambegwa',
         phone: '+1-555-0456',
         medicalLicense: 'MD-12345',
-        specialization: 'Internal Medicine',
+        specialization: 'Internal Medicine & Cardiology',
         avatar: 'assets/avatars/doctor.jpg'
       },
       'admin@mediq.com': { 

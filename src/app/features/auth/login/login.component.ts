@@ -74,17 +74,7 @@ import { AuthService } from '../../../core/services/auth.service';
               </mat-error>
             </mat-form-field>
             
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Role</mat-label>
-              <mat-select formControlName="role" required>
-                <mat-option value="patient">Patient</mat-option>
-                <mat-option value="doctor">Doctor</mat-option>
-                <mat-option value="admin">Admin</mat-option>
-              </mat-select>
-              <mat-error *ngIf="loginForm.get('role')?.hasError('required')">
-                Please select a role
-              </mat-error>
-            </mat-form-field>
+
             
             <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="isLoading || loginForm.invalid">
               <mat-progress-spinner *ngIf="isLoading" diameter="20" mode="indeterminate"></mat-progress-spinner>
@@ -161,8 +151,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['patient@mediq.com', [Validators.required, Validators.email]],
-      password: ['demo123', [Validators.required, Validators.minLength(6)]],
-      role: ['patient', Validators.required]
+      password: ['demo123', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -176,7 +165,8 @@ export class LoginComponent {
     }
     
     this.isLoading = true;
-    const { email, password, role } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
+    const role = this.determineUserRole(email);
     
     // Add timeout to prevent infinite loading
     const loginTimeout = setTimeout(() => {
@@ -214,10 +204,8 @@ export class LoginComponent {
         // Enhanced error handling
         if (error.message.includes('Invalid credentials')) {
           this.errorMessage = 'Invalid email or password. Please check your credentials.';
-        } else if (error.message.includes('role')) {
-          this.errorMessage = 'Incorrect role selected. Please verify your role and try again.';
         } else {
-          this.errorMessage = 'Login failed. Please check your credentials and selected role.';
+          this.errorMessage = 'Login failed. Please check your credentials.';
         }
         
         this.snackBar.open(this.errorMessage, 'Close', {
@@ -236,5 +224,11 @@ export class LoginComponent {
       const control = this.loginForm.get(key);
       control?.markAsTouched();
     });
+  }
+
+  private determineUserRole(email: string): 'patient' | 'doctor' | 'admin' {
+    if (email.includes('admin')) return 'admin';
+    if (email.includes('doctor') || email.includes('dr.')) return 'doctor';
+    return 'patient';
   }
 }

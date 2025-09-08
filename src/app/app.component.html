@@ -8,30 +8,125 @@
               matTooltip="Go back">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <ng-container [ngSwitch]="userRole$ | async">
-        <!-- Patient Navigation -->
-        <ng-container *ngSwitchCase="'patient'">
-          <button mat-button routerLink="/patient-dashboard">Dashboard</button>
-          <button mat-button routerLink="/appointments">Appointments</button>
-          <button mat-button routerLink="/medical-records">Records</button>
-          <button mat-button routerLink="/symptom-checker">AI Checker</button>
+      <button mat-icon-button [matMenuTriggerFor]="navigationMenu" 
+              aria-label="Open navigation menu"
+              matTooltip="Navigation Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #navigationMenu="matMenu" class="navigation-menu" role="menu">
+        <ng-container [ngSwitch]="userRole$ | async">
+          <!-- Patient Navigation -->
+          <ng-container *ngSwitchCase="'patient'">
+            <div class="menu-header">Patient Portal</div>
+            <div class="menu-item" routerLink="/appointments" role="menuitem" tabindex="0">
+              <mat-icon>event</mat-icon>
+              <span>My Appointments</span>
+            </div>
+            <div class="menu-item" routerLink="/medical-records" role="menuitem" tabindex="0">
+              <mat-icon>folder_shared</mat-icon>
+              <span>Medical Records</span>
+            </div>
+            <div class="menu-item" routerLink="/symptom-checker" role="menuitem" tabindex="0">
+              <mat-icon>psychology</mat-icon>
+              <span>AI Symptom Checker</span>
+            </div>
+            <div class="menu-item" routerLink="/prescriptions" role="menuitem" tabindex="0">
+              <mat-icon>medication</mat-icon>
+              <span>Prescriptions</span>
+            </div>
+            <div class="menu-item" routerLink="/lab-results" role="menuitem" tabindex="0">
+              <mat-icon>biotech</mat-icon>
+              <span>Lab Results</span>
+            </div>
+            <div class="menu-item" routerLink="/health-tracking" role="menuitem" tabindex="0">
+              <mat-icon>monitor_heart</mat-icon>
+              <span>Health Tracking</span>
+            </div>
+            <div class="menu-item" routerLink="/telemedicine" role="menuitem" tabindex="0">
+              <mat-icon>video_call</mat-icon>
+              <span>Telemedicine</span>
+            </div>
+            <div class="menu-item" routerLink="/patient-billing" role="menuitem" tabindex="0">
+              <mat-icon>receipt_long</mat-icon>
+              <span>Billing & Payments</span>
+            </div>
+            <div class="menu-item" routerLink="/insurance" role="menuitem" tabindex="0">
+              <mat-icon>shield</mat-icon>
+              <span>Insurance Coverage</span>
+            </div>
+            <div class="menu-item" routerLink="/medical-bills" role="menuitem" tabindex="0">
+              <mat-icon>payment</mat-icon>
+              <span>Medical Bills</span>
+            </div>
+          </ng-container>
+          
+          <!-- Doctor Navigation -->
+          <ng-container *ngSwitchCase="'doctor'">
+            <div class="menu-header">Doctor Portal</div>
+            <div class="menu-item" routerLink="/patients" role="menuitem" tabindex="0">
+              <mat-icon>people</mat-icon>
+              <span>Patient Management</span>
+            </div>
+            <div class="menu-item" routerLink="/smart-scheduling" role="menuitem" tabindex="0">
+              <mat-icon>schedule</mat-icon>
+              <span>Smart Scheduling</span>
+            </div>
+            <div class="menu-item" routerLink="/voice-notes" role="menuitem" tabindex="0">
+              <mat-icon>mic</mat-icon>
+              <span>Voice Notes</span>
+            </div>
+            <div class="menu-item" routerLink="/ai-insights" role="menuitem" tabindex="0">
+              <mat-icon>insights</mat-icon>
+              <span>AI Insights</span>
+            </div>
+            <div class="menu-item" routerLink="/prescriptions" role="menuitem" tabindex="0">
+              <mat-icon>medication</mat-icon>
+              <span>Prescriptions</span>
+            </div>
+            <div class="menu-item" routerLink="/clinical-notes" role="menuitem" tabindex="0">
+              <mat-icon>note_add</mat-icon>
+              <span>Clinical Notes</span>
+            </div>
+            <div class="menu-item" routerLink="/telemedicine" role="menuitem" tabindex="0">
+              <mat-icon>video_call</mat-icon>
+              <span>Telemedicine</span>
+            </div>
+          </ng-container>
+          
+          <!-- Admin Navigation -->
+          <ng-container *ngSwitchCase="'admin'">
+            <div class="menu-header">Admin Portal</div>
+            <div class="menu-item" routerLink="/user-management" role="menuitem" tabindex="0">
+              <mat-icon>admin_panel_settings</mat-icon>
+              <span>User Management</span>
+            </div>
+            <div class="menu-item" routerLink="/analytics" role="menuitem" tabindex="0">
+              <mat-icon>analytics</mat-icon>
+              <span>Analytics & Reports</span>
+            </div>
+            <div class="menu-item" routerLink="/system-settings" role="menuitem" tabindex="0">
+              <mat-icon>settings</mat-icon>
+              <span>System Settings</span>
+            </div>
+            <div class="menu-item" routerLink="/hospital-management" role="menuitem" tabindex="0">
+              <mat-icon>local_hospital</mat-icon>
+              <span>Hospital Management</span>
+            </div>
+            <div class="menu-item" routerLink="/billing" role="menuitem" tabindex="0">
+              <mat-icon>receipt</mat-icon>
+              <span>Billing & Finance</span>
+            </div>
+            <div class="menu-item" routerLink="/compliance" role="menuitem" tabindex="0">
+              <mat-icon>verified_user</mat-icon>
+              <span>Compliance</span>
+            </div>
+            <div class="menu-item" routerLink="/audit-logs" role="menuitem" tabindex="0">
+              <mat-icon>history</mat-icon>
+              <span>Audit Logs</span>
+            </div>
+          </ng-container>
         </ng-container>
-        
-        <!-- Doctor Navigation -->
-        <ng-container *ngSwitchCase="'doctor'">
-          <button mat-button routerLink="/doctor-dashboard">Dashboard</button>
-          <button mat-button routerLink="/patients">Patients</button>
-          <button mat-button routerLink="/smart-scheduling">Schedule</button>
-          <button mat-button routerLink="/voice-notes">Voice Notes</button>
-        </ng-container>
-        
-        <!-- Admin Navigation -->
-        <ng-container *ngSwitchCase="'admin'">
-          <button mat-button routerLink="/admin-dashboard">Dashboard</button>
-          <button mat-button routerLink="/user-management">Users</button>
-          <button mat-button routerLink="/smart-scheduling">System</button>
-        </ng-container>
-      </ng-container>
+      </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="notificationMenu" 
               aria-label="View notifications" 
               [attr.aria-describedby]="unreadCount > 0 ? 'notification-count' : null"

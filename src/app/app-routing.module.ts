@@ -105,6 +105,61 @@ const routes: Routes = [
     loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [AuthGuard]
   },
+  { 
+    path: 'prescriptions', 
+    loadComponent: () => import('./features/patient-portal/prescriptions.component').then(m => m.PrescriptionsComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'lab-results', 
+    loadComponent: () => import('./features/patient-portal/lab-results.component').then(m => m.LabResultsComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'telemedicine', 
+    loadComponent: () => import('./features/shared/telemedicine.component').then(m => m.TelemedicineComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'billing', 
+    loadComponent: () => import('./features/admin-portal/billing.component').then(m => m.BillingComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'health-tracking', 
+    loadComponent: () => import('./features/patient-portal/health-tracking.component').then(m => m.HealthTrackingComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'patient-billing', 
+    loadComponent: () => import('./features/patient-portal/patient-billing.component').then(m => m.PatientBillingComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'insurance', 
+    loadComponent: () => import('./features/patient-portal/insurance.component').then(m => m.InsuranceComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'medical-bills', 
+    loadComponent: () => import('./features/patient-portal/patient-billing.component').then(m => m.PatientBillingComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'compliance', 
+    loadComponent: () => import('./features/admin-portal/compliance.component').then(m => m.ComplianceComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'audit-logs', 
+    loadComponent: () => import('./features/admin-portal/audit-logs.component').then(m => m.AuditLogsComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'clinical-notes', 
+    loadComponent: () => import('./features/doctor-portal/clinical-notes.component').then(m => m.ClinicalNotesComponent),
+    canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: '/login' }
 ];
 

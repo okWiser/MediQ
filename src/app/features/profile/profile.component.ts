@@ -133,12 +133,12 @@ export class ProfileComponent implements OnInit {
         stats: { experience: 'N/A', patients: 'N/A', rating: 'N/A' }
       },
       'doctor': {
-        name: 'Dr. Sarah Smith',
+        name: 'Dr. Mambegwa',
         email: 'doctor@mediq.com',
         phone: '+1 (555) 234-5678',
-        department: 'Internal Medicine',
+        department: 'Internal Medicine & Cardiology',
         role: 'doctor',
-        stats: { experience: '12', patients: '1,247', rating: '4.9/5' }
+        stats: { experience: '15', patients: '2,847', rating: '4.95/5' }
       },
       'admin': {
         name: 'N. Shimambani, MSc',
