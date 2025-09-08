@@ -65,7 +65,7 @@ const routes: Routes = [
     data: { role: 'doctor' }
   },
   { 
-    path: 'prescriptions', 
+    path: 'doctor-prescriptions', 
     loadComponent: () => import('./features/doctor-portal/prescriptions.component').then(m => m.PrescriptionsComponent),
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'doctor' }
