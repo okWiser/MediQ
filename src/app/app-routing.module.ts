@@ -17,6 +17,7 @@ import { SystemSettingsComponent } from './features/admin-portal/system-settings
 import { DoctorScheduleComponent } from './features/doctor-portal/doctor-schedule.component';
 import { PrescriptionsComponent } from './features/doctor-portal/prescriptions.component';
 import { AiInsightsComponent } from './features/doctor-portal/ai-insights.component';
+import { ProfileComponent } from './features/profile/profile.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 
@@ -113,6 +114,11 @@ const routes: Routes = [
     component: SystemSettingsComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'admin' }
+  },
+  { 
+    path: 'profile', 
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '/login' }
 ];

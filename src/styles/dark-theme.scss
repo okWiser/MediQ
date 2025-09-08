@@ -1,26 +1,29 @@
 // Dark theme overrides
 .dark-theme {
-  // Text colors
-  color: #ffffff !important;
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
   
   // Card backgrounds
   .mat-mdc-card {
-    background-color: #424242 !important;
-    color: #ffffff !important;
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #333 !important;
   }
   
   // Table styles
   .mat-mdc-table {
-    background-color: #424242 !important;
-    color: #ffffff !important;
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
   }
   
   .mat-mdc-header-cell {
     color: #ffffff !important;
+    background-color: #2d2d2d !important;
   }
   
   .mat-mdc-cell {
-    color: #ffffff !important;
+    color: #e0e0e0 !important;
+    border-bottom-color: #333 !important;
   }
   
   // Form field styles
@@ -79,6 +82,45 @@
     color: #b0b0b0 !important;
   }
   
+  // Better button visibility
+  .mat-mdc-button, .mat-mdc-raised-button {
+    color: #e0e0e0 !important;
+  }
+  
+  // Form field improvements
+  .mat-mdc-form-field {
+    .mat-mdc-form-field-outline {
+      color: #666 !important;
+    }
+    
+    .mat-mdc-form-field-label {
+      color: #b0b0b0 !important;
+    }
+    
+    .mat-mdc-input-element {
+      color: #e0e0e0 !important;
+    }
+  }
+  
+  // Menu improvements
+  .mat-mdc-menu-panel {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+  }
+  
+  // Tab improvements
+  .mat-mdc-tab-group {
+    background-color: #1e1e1e !important;
+  }
+  
+  .mat-mdc-tab {
+    color: #b0b0b0 !important;
+  }
+  
+  .mat-mdc-tab.mdc-tab--active {
+    color: #ffffff !important;
+  }
+  
   // Tab content
   .mat-mdc-tab-body-content {
     color: #ffffff !important;
@@ -101,7 +143,24 @@
   }
   
   p, span, div {
-    color: #ffffff !important;
+    color: #e0e0e0 !important;
+  }
+  
+  // Main content background
+  .main-content {
+    background-color: #121212 !important;
+  }
+  
+  // Dashboard containers
+  .dashboard-container,
+  .analytics-container,
+  .schedule-container,
+  .ai-insights-container,
+  .prescriptions-container,
+  .voice-notes-container,
+  .settings-container {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
   }
   
   // Welcome sections
