@@ -121,10 +121,52 @@
     color: #f0f6fc !important;
   }
   
-  // Additional visibility fixes
+  // Comprehensive card content fixes
   .mat-mdc-card-title,
   .mat-mdc-card-subtitle,
-  .mat-mdc-card-content {
+  .mat-mdc-card-content,
+  .mat-mdc-card-header,
+  .mat-mdc-card-actions {
+    color: #f0f6fc !important;
+  }
+  
+  // All text elements in cards
+  .mat-mdc-card {
+    * {
+      color: #f0f6fc !important;
+    }
+    
+    .mat-mdc-card-content p,
+    .mat-mdc-card-content div,
+    .mat-mdc-card-content span {
+      color: #f0f6fc !important;
+    }
+  }
+  
+  // Dashboard specific card content
+  .dashboard-card,
+  .metric-card,
+  .overview-card,
+  .analysis-card,
+  .recommendation-card,
+  .interaction-card {
+    color: #f0f6fc !important;
+    
+    * {
+      color: #f0f6fc !important;
+    }
+  }
+  
+  // Specific content classes
+  .user-info,
+  .stats,
+  .metric-value,
+  .metric-label,
+  .stat-number,
+  .stat-label,
+  .welcome-section,
+  .dashboard-grid,
+  .metrics-grid {
     color: #f0f6fc !important;
   }
   
@@ -136,6 +178,24 @@
   
   .profile-name,
   .profile-role {
+    color: #f0f6fc !important;
+  }
+  
+  // Force all text to be visible
+  * {
+    color: #f0f6fc !important;
+  }
+  
+  // Override any inherited colors
+  .mat-mdc-card *,
+  .dashboard-container *,
+  .analytics-container *,
+  .schedule-container *,
+  .ai-insights-container *,
+  .prescriptions-container *,
+  .voice-notes-container *,
+  .settings-container *,
+  .profile-container * {
     color: #f0f6fc !important;
   }
   
