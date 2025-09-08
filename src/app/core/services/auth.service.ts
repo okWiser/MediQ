@@ -68,13 +68,13 @@ export class AuthService {
     };
 
     const user = mockUsers[email as keyof typeof mockUsers];
-    if (user && password === 'demo123' && (user.role === role || (role === 'admin' && user.role === 'Chief Technology & Innovation Officer'))) {
+    if (user && password === 'demo123') {
       const mockResponse: AuthResponse = {
         user: {
           id: role === 'patient' ? 'p001' : role === 'doctor' ? 'd001' : 'a001',
           email,
           name: user.name,
-          role: role === 'admin' ? 'admin' : role,
+          role: user.role === 'Chief Technology & Innovation Officer' ? 'admin' : user.role as 'patient' | 'doctor' | 'admin',
           phone: user.phone,
           dateOfBirth: (user as any).dateOfBirth,
           medicalLicense: (user as any).medicalLicense,
