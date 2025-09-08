@@ -1,5 +1,6 @@
 // Aggressive dark theme text visibility override
-body.dark-theme {
+body.dark-theme,
+.dark-theme {
   // Force all elements to have light text
   * {
     color: #f0f6fc !important;
@@ -47,6 +48,25 @@ body.dark-theme {
   .mat-mdc-card-content,
   .mat-mdc-card-title,
   .mat-mdc-card-subtitle {
+    color: #f0f6fc !important;
+  }
+  
+  // Force override any Material Design dark text
+  .mdc-typography,
+  .mdc-typography--body1,
+  .mdc-typography--body2,
+  .mdc-typography--caption,
+  .mdc-typography--subtitle1,
+  .mdc-typography--subtitle2 {
+    color: #f0f6fc !important;
+  }
+  
+  // Override any element with dark text color
+  [style*="color: rgb(0"],
+  [style*="color: #000"],
+  [style*="color: #333"],
+  [style*="color: #666"],
+  [style*="color: rgba(0,0,0"] {
     color: #f0f6fc !important;
   }
 }
