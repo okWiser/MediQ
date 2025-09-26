@@ -1,7 +1,7 @@
 /* Theme Typography and Color Fixes */
 
-/* Light Theme (Default) */
-body {
+/* Light Theme (Default) - Enhanced by modern-theme.scss */
+body:not(.modern-theme-applied) {
   background-color: #fafafa;
   color: #212121;
 }
