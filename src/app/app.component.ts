@@ -9,11 +9,13 @@ import { AuthActions } from './core/store/auth/auth.actions';
 import { ThemeService } from './core/services/theme.service';
 import { NotificationService, Notification } from './core/services/notification.service';
 import { AuthService } from './core/services/auth.service';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  imports: [LoadingSpinnerComponent]
 })
 export class AppComponent implements OnInit {
   title = 'MediQ';

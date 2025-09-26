@@ -17,6 +17,7 @@ import { reducers, metaReducers } from './core/store';
 import { AuthEffects } from './core/store/auth/auth.effects';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { SecurityInterceptor } from './core/interceptors/security.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { environment } from '../environments/environment';
 
 
@@ -64,6 +65,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SecurityInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],

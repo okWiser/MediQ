@@ -1,48 +1,45 @@
-export enum UserRole {
-  PATIENT = 'patient',
-  DOCTOR = 'doctor',
-  ADMIN = 'admin'
-}
-
 export interface User {
   id: string;
   email: string;
-  firstName: string;
-  lastName: string;
-  fullName: string;
+  name: string;
   role: UserRole;
-  phoneNumber?: string;
-  dateOfBirth?: string;
   avatar?: string;
-  isEmailVerified: boolean;
-  is2FAEnabled: boolean;
-  createdAt: string;
-  updatedAt: string;
+  phone?: string;
+  dateOfBirth?: string;
+  medicalLicense?: string;
+  specialization?: string;
+  department?: string;
+  isActive: boolean;
+  lastLogin?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export interface Patient extends User {
-  role: UserRole.PATIENT;
-  medicalHistory?: string[];
-  allergies?: string[];
-  emergencyContact?: {
-    name: string;
-    phone: string;
-    relationship: string;
-  };
+export type UserRole = 'patient' | 'doctor' | 'admin';
+
+export interface UserProfile {
+  name: string;
+  email: string;
+  phone: string;
+  department: string;
+  role: string;
+  stats: UserStats;
 }
 
-export interface Doctor extends User {
-  role: UserRole.DOCTOR;
-  licenseNumber: string;
-  specialization: string;
-  yearsOfExperience: number;
-  hospital?: string;
-  consultationFee: number;
-  rating: number;
-  totalReviews: number;
+export interface UserStats {
+  experience: string;
+  patients: string;
+  rating: string;
 }
 
-export interface Admin extends User {
-  role: UserRole.ADMIN;
-  permissions: string[];
+export interface ApiResponse<T> {
+  data: T;
+  message: string;
+  success: boolean;
+  timestamp: Date;
+}
+
+export interface ValidationError {
+  field: string;
+  message: string;
 }
