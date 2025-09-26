@@ -43,8 +43,7 @@ export class AppComponent implements OnInit {
       this.store.dispatch(AuthActions.loginSuccess({ user, token }));
       // Only redirect if not on login page
       if (this.router.url === '/login') {
-        const dashboardRoute = `/${user.role}-dashboard`;
-        this.router.navigate([dashboardRoute]);
+        this.router.navigate(['/mobile-dashboard']);
       }
     }
   }
@@ -72,19 +71,7 @@ export class AppComponent implements OnInit {
   goToHome() {
     const user = this.authService.getCurrentUser();
     if (user) {
-      switch (user.role) {
-        case 'patient':
-          this.router.navigate(['/patient-dashboard']);
-          break;
-        case 'doctor':
-          this.router.navigate(['/doctor-dashboard']);
-          break;
-        case 'admin':
-          this.router.navigate(['/admin-dashboard']);
-          break;
-        default:
-          this.router.navigate(['/']);
-      }
+      this.router.navigate(['/mobile-dashboard']);
     } else {
       this.router.navigate(['/']);
     }

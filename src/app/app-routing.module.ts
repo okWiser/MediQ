@@ -4,7 +4,12 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/mobile-dashboard', pathMatch: 'full' },
+  { 
+    path: 'mobile-dashboard', 
+    loadComponent: () => import('./features/shared/mobile-dashboard.component').then(m => m.MobileDashboardComponent),
+    canActivate: [AuthGuard]
+  },
   { 
     path: 'login', 
     loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)

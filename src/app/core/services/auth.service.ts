@@ -185,4 +185,10 @@ export class AuthService {
     const user = this.getCurrentUser();
     return user ? roles.includes(user.role) : false;
   }
+
+  getDashboardRoute(): string {
+    const user = this.getCurrentUser();
+    if (!user) return '/login';
+    return '/mobile-dashboard';
+  }
 }
