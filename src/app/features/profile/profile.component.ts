@@ -79,39 +79,93 @@ import { AuthService } from '../../core/services/auth.service';
     </div>
   `,
   styles: [`
-    .profile-container { padding: 24px; }
+    .profile-container {
+      padding: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
     .profile-grid {
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 24px;
-      margin-top: 24px;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 16px;
     }
     .profile-avatar-large mat-icon {
-      font-size: 80px;
-      width: 80px;
-      height: 80px;
+      font-size: 60px;
+      width: 60px;
+      height: 60px;
       color: #667eea;
     }
     .profile-stats {
-      display: flex;
-      justify-content: space-around;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 16px;
       margin-top: 16px;
     }
     .stat-item { text-align: center; }
     .stat-value {
       display: block;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
       color: #667eea;
     }
     .stat-label {
-      font-size: 12px;
+      font-size: 11px;
       color: #666;
     }
     .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    
+    /* Tablet: 768px+ */
+    @media (min-width: 768px) {
+      .profile-container { padding: 20px; }
+      .profile-grid {
+        grid-template-columns: 1fr 1.5fr;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .profile-avatar-large mat-icon {
+        font-size: 70px;
+        width: 70px;
+        height: 70px;
+      }
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .stat-value { font-size: 22px; }
+      .stat-label { font-size: 12px; }
+    }
+    
+    /* Desktop: 1024px+ */
+    @media (min-width: 1024px) {
+      .profile-container { padding: 24px; }
+      .profile-grid {
+        grid-template-columns: 1fr 2fr;
+        gap: 24px;
+        margin-top: 24px;
+      }
+      .profile-avatar-large mat-icon {
+        font-size: 80px;
+        width: 80px;
+        height: 80px;
+      }
+      .profile-stats {
+        display: flex;
+        justify-content: space-around;
+      }
+      .stat-value { font-size: 24px; }
+      .stat-label { font-size: 12px; }
+    }
+    
+    /* Large Desktop: 1440px+ */
+    @media (min-width: 1440px) {
+      .profile-container { padding: 32px; }
+      .profile-grid { gap: 32px; }
+      .form-grid { gap: 20px; }
     }
   `]
 })

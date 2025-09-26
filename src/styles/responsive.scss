@@ -1,221 +1,326 @@
-// Responsive Design for All Screen Sizes
+/* Global responsive variables */
+:root {
+  --mobile-padding: 12px;
+  --tablet-padding: 20px;
+  --desktop-padding: 24px;
+  --mobile-gap: 12px;
+  --tablet-gap: 16px;
+  --desktop-gap: 20px;
+}
 
-// Mobile First Approach
+/* Base mobile-first styles */
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; font-size: 14px; line-height: 1.4; }
+.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: var(--mobile-padding); }
+
+/* App-wide containers */
 .dashboard-container,
 .analytics-container,
-.profile-container {
-  padding: 1rem !important;
-  
-  @media (min-width: 768px) {
-    padding: 1.5rem !important;
-  }
-  
-  @media (min-width: 1024px) {
-    padding: 2rem !important;
-  }
+.profile-container,
+.telemedicine-container,
+.prescriptions-container,
+.security-container,
+.settings-container {
+  padding: var(--mobile-padding) !important;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
-// Grid Layouts
-.dashboard-grid,
-.metrics-grid {
-  grid-template-columns: 1fr !important;
-  gap: 1rem !important;
-  
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1.5rem !important;
-  }
-  
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
-    gap: 2rem !important;
-  }
-}
-
-// Cards
-.mat-mdc-card, .mat-card {
-  margin: 0.5rem 0 !important;
-  
-  @media (max-width: 640px) {
-    border-radius: 12px !important;
-    margin: 0.25rem 0 !important;
-  }
-}
-
-// Navigation
+/* Navigation */
 .mat-toolbar {
   .mat-toolbar-row {
-    padding: 0 8px !important;
-    
-    @media (min-width: 768px) {
-      padding: 0 16px !important;
-    }
+    padding: 0 var(--mobile-padding) !important;
+    min-height: 56px;
   }
-  
-  span:first-child {
-    font-size: 1rem !important;
-    
-    @media (min-width: 768px) {
-      font-size: 1.25rem !important;
-    }
-  }
+  span:first-child { font-size: 1rem !important; }
 }
 
-// Tables
-.mat-mdc-table {
-  @media (max-width: 768px) {
-    font-size: 0.875rem !important;
-    
-    .mat-mdc-header-cell,
-    .mat-mdc-cell {
-      padding: 8px 4px !important;
-    }
-  }
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mobile-gap);
+  padding: var(--mobile-padding);
 }
 
-// Forms
+.nav-item {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid systems */
+.dashboard-grid,
+.metrics-grid,
+.profile-grid,
+.telemedicine-grid {
+  display: grid;
+  grid-template-columns: 1fr !important;
+  gap: var(--mobile-gap) !important;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: var(--mobile-gap) !important;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr !important;
+  gap: var(--mobile-gap) !important;
+}
+
+/* Cards */
+.mat-mdc-card, .mat-card {
+  margin: 0.5rem 0 !important;
+  border-radius: 12px !important;
+}
+
+.card-content {
+  padding: var(--mobile-padding) !important;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mobile-gap);
+}
+
+.button-group button {
+  width: 100%;
+  min-height: 44px;
+}
+
+.mat-mdc-raised-button {
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: 0.875rem !important;
+  min-height: 44px;
+}
+
+/* Forms */
 .mat-mdc-form-field {
   width: 100% !important;
-  
-  @media (max-width: 640px) {
-    .mat-mdc-form-field-outline {
-      border-radius: 8px !important;
-    }
-  }
-}
-
-// Buttons
-.mat-mdc-raised-button {
-  @media (max-width: 640px) {
+  .mat-mdc-form-field-outline {
     border-radius: 8px !important;
-    padding: 8px 16px !important;
-    font-size: 0.875rem !important;
   }
 }
 
-// Menus
+/* Tables */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mat-mdc-table {
+  font-size: 0.875rem !important;
+  min-width: 600px;
+  .mat-mdc-header-cell,
+  .mat-mdc-cell {
+    padding: 8px 4px !important;
+  }
+}
+
+/* Menus */
 .mat-mdc-menu-panel {
-  @media (max-width: 640px) {
-    max-width: calc(100vw - 32px) !important;
-    border-radius: 12px !important;
-  }
+  max-width: calc(100vw - 32px) !important;
+  border-radius: 12px !important;
 }
 
-// Profile Menu
-.profile-menu {
-  @media (max-width: 640px) {
-    .profile-header {
-      padding: 12px !important;
-      
-      .profile-info {
-        .profile-name {
-          font-size: 1rem !important;
-        }
-        
-        .profile-email {
-          font-size: 0.75rem !important;
-        }
-      }
-    }
-  }
-}
-
-// Notification Menu
-.notification-menu {
-  @media (max-width: 640px) {
-    max-width: calc(100vw - 32px) !important;
-    
-    .notification-item {
-      padding: 12px !important;
-      
-      .notification-content {
-        .notification-title {
-          font-size: 0.875rem !important;
-        }
-        
-        .notification-message {
-          font-size: 0.75rem !important;
-        }
-      }
-    }
-  }
-}
-
-// Navigation Menu
+.profile-menu,
+.notification-menu,
 .navigation-menu {
-  @media (max-width: 640px) {
-    max-width: calc(100vw - 32px) !important;
-    
-    .menu-item {
-      padding: 12px 16px !important;
-      
-      span {
-        font-size: 0.875rem !important;
-      }
-    }
+  max-width: calc(100vw - 32px) !important;
+  .menu-item {
+    padding: 12px 16px !important;
+    span { font-size: 0.875rem !important; }
   }
 }
 
-// Welcome Section
-.welcome-section {
-  @media (max-width: 640px) {
-    padding: 1rem !important;
-    border-radius: 12px !important;
-    margin-bottom: 1rem !important;
-  }
-}
-
-// Metric Values
+/* Status and values */
 .metric-value, .stat-value {
-  @media (max-width: 640px) {
-    font-size: 1.25rem !important;
-  }
+  font-size: 1.25rem !important;
 }
 
-// Appointment Items
-.appointment-item {
-  @media (max-width: 640px) {
-    padding: 12px !important;
-    border-radius: 8px !important;
-    
-    .appointment-header {
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 8px !important;
-    }
-    
-    .appointment-details {
-      flex-direction: column !important;
-      gap: 8px !important;
-    }
-    
-    .appointment-actions {
-      flex-wrap: wrap !important;
-      gap: 8px !important;
-    }
-  }
-}
-
-// Status Chips
 .status-confirmed,
 .status-active,
 .status-completed,
 .status-pending,
 .status-scheduled {
-  @media (max-width: 640px) {
-    padding: 2px 8px !important;
-    font-size: 0.625rem !important;
+  padding: 2px 8px !important;
+  font-size: 0.625rem !important;
+  border-radius: 12px !important;
+}
+
+/* Small Mobile: 480px+ */
+@media (min-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .button-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .button-group button {
+    flex: 1;
+    min-width: 120px;
   }
 }
 
-// Hide text on very small screens
-@media (max-width: 480px) {
-  .mat-toolbar {
-    .mat-icon-button + .mat-icon-button {
-      margin-left: 4px !important;
-    }
+/* Tablet: 768px+ */
+@media (min-width: 768px) {
+  body { font-size: 15px; }
+  
+  .dashboard-container,
+  .analytics-container,
+  .profile-container,
+  .telemedicine-container,
+  .prescriptions-container,
+  .security-container,
+  .settings-container {
+    padding: var(--tablet-padding) !important;
   }
   
+  .mat-toolbar {
+    .mat-toolbar-row {
+      padding: 0 var(--tablet-padding) !important;
+    }
+    span:first-child { font-size: 1.25rem !important; }
+  }
+  
+  .main-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--tablet-gap);
+  }
+  
+  .nav-item {
+    width: auto;
+    min-width: 120px;
+  }
+  
+  .dashboard-grid,
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--tablet-gap) !important;
+  }
+  
+  .profile-grid {
+    grid-template-columns: 1fr 1.5fr !important;
+    gap: var(--tablet-gap) !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--tablet-gap) !important;
+  }
+  
+  .button-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .button-group button {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .mat-mdc-table {
+    font-size: 0.9rem !important;
+    min-width: auto;
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
+      padding: 12px 8px !important;
+    }
+  }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  body { font-size: 16px; }
+  
+  .dashboard-container,
+  .analytics-container,
+  .profile-container,
+  .telemedicine-container,
+  .prescriptions-container,
+  .security-container,
+  .settings-container {
+    padding: var(--desktop-padding) !important;
+  }
+  
+  .dashboard-grid,
+  .metrics-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: var(--desktop-gap) !important;
+  }
+  
+  .profile-grid {
+    grid-template-columns: 1fr 2fr !important;
+    gap: var(--desktop-gap) !important;
+  }
+  
+  .form-grid {
+    gap: var(--desktop-gap) !important;
+  }
+  
+  .button-group button {
+    width: auto;
+    min-width: 140px;
+  }
+  
+  .mat-mdc-table {
+    font-size: 1rem !important;
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
+      padding: 16px 12px !important;
+    }
+  }
+}
+
+/* Large Desktop: 1440px+ */
+@media (min-width: 1440px) {
+  .dashboard-grid,
+  .metrics-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  
+  .container {
+    max-width: 1600px;
+  }
+}
+
+/* Ultra-wide: 1920px+ */
+@media (min-width: 1920px) {
+  .dashboard-grid,
+  .metrics-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .nav-item,
+  button,
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .mat-mdc-form-field {
+    min-height: 48px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
   .menu-item span {
     display: none !important;
   }
@@ -223,5 +328,9 @@
   .menu-item {
     justify-content: center !important;
     padding: 12px !important;
+  }
+  
+  .mat-toolbar .mat-icon-button + .mat-icon-button {
+    margin-left: 4px !important;
   }
 }
